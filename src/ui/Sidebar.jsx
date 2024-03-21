@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import Logo from "./Logo";
 import MainNav from "./MainNav";
-//import Uploader from "../data/Uploader";
+import Uploader from "../data/Uploader";
 
 const StyleSidebar = styled.aside`
   background-color: var(--color-grey-0);
@@ -20,8 +20,8 @@ function Sidebar() {
     <StyleSidebar>
       <Logo />
       <MainNav />
-      {/* 
-      <Uploader/> */}
+      
+      <Uploader/>
     </StyleSidebar>
   );
 }
