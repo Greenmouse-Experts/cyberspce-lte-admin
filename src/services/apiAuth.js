@@ -27,16 +27,16 @@ export async function login({ email, password }) {
     console.error(error);
     throw new Error(error.message);
   }
-  console.log(data);
+  // console.log(data);
   return data;
 }
 
 export async function getCurrentUser() {
   const { data: session } = await supabase.auth.getSession();
-  console.log(session.session);
+  // console.log(session.session);
   if (!session.session) return null;
   const { data, error } = supabase.auth.getUser();
-  console.log(session.session.user);
+  // console.log(session.session.user);
   if (error) {
     console.error(error);
     throw new Error(error.message);
@@ -51,7 +51,7 @@ export async function updateCurrentUser({ password, fullName, avatar }) {
   if (password) updateData = { password };
   if (fullName) updateData = { data: { fullName } };
   const { data, error } = await supabase.auth.updateUser(updateData);
-  console.log(data);
+  // console.log(data);
   if (error) {
     console.error(error);
     throw new Error(error.message);

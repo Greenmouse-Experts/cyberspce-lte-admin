@@ -16,7 +16,7 @@ function ProtectedRoute({ children }) {
   const navigate = useNavigate();
   //1. Load the authenticated user
   const { user, isLoading, isAuthenticated } = useUser();
-  console.log("user", isAuthenticated);
+  // console.log("user", isAuthenticated);
 
   //2.Show a spinner
 

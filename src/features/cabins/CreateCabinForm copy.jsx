@@ -25,7 +25,7 @@ function CreateCabinForm({cabin}) {
   const { register, handleSubmit, reset, getValues, formState } = useForm();
 
   const { errors } = formState;
-  console.log(errors);
+  // console.log(errors);
 
   const { mutate, isLoading: isCreating } = useMutation({
     mutationFn: createCabin,

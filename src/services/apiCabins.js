@@ -19,7 +19,7 @@ export async function deleteCabin(id) {
 }
 
 export async function createEditCabin(newCabin, id) {
-  console.log("new", newCabin);
+  // console.log("new", newCabin);
 
   const hasImagePath = newCabin.image?.startsWith?.(supabaseUrl);
 
@@ -28,7 +28,7 @@ export async function createEditCabin(newCabin, id) {
     ""
   );
 
-  console.log(hasImagePath);
+  // console.log(hasImagePath);
 
   const imagePath = hasImagePath
     ? newCabin.image
