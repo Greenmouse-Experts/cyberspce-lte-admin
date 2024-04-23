@@ -76,7 +76,7 @@ function SignupForm() {
           {...register("passwordConfirm", {
             required: "This field is required",
             validate: (value) =>
-              value === getValues().passord || "Password need to match",
+              value !== getValues().passord || "Password need to match",
           })}
         />
       </FormRow>

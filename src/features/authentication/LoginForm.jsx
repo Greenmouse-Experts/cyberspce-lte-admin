@@ -16,12 +16,15 @@ function LoginForm() {
   function handleSubmit(e) {
     e.preventDefault();
     if (!email || !password) return;
-    login({ email, password },{
-      onSettled:() =>{
-        // setEmail("");
-        // setPassword("");
+    login(
+      { email, password },
+      {
+        onSettled: () => {
+          // setEmail("");
+          // setPassword("");
+        },
       }
-    });
+    );
   }
 
   return (
@@ -32,6 +35,7 @@ function LoginForm() {
           id="email"
           // This makes this form better for password managers
           autoComplete="username"
+          defaultValue={email}
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           disabled={isLoading}
@@ -42,6 +46,7 @@ function LoginForm() {
           type="password"
           id="password"
           autoComplete="current-password"
+          defaultValue={password}
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           disabled={isLoading}
