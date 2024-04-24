@@ -1,19 +1,18 @@
-import React, { useState } from "react";
+import React from "react";
 import Button from "../../ui/Button";
-import CreateCabinForm from "./CreateCabinForm";
-import CabinTable from "./CabinTable";
+import CreateCategoryForm from "./CreateCategoryForm";
 import Modal from "../../ui/Modal";
 
-function AddCabin() {
+function AddCategory() {
   return (
     <div>
       <Modal>
         <Modal.Open opens="cabin-form">
-          <Button>Add new Product</Button>
+          <Button>Add Category</Button>
         </Modal.Open>
 
         <Modal.Window name="cabin-form">
-          <CreateCabinForm />
+          <CreateCategoryForm />
         </Modal.Window>
 
         {/* <Modal.Open opens="table">
@@ -27,7 +26,7 @@ function AddCabin() {
     </div>
   );
 }
-// function AddCabin() {
+// function AddCategory() {
 //   const [isOpenModal, setIsOpenModal] = useState(false);
 //   return (
 //     <div>
@@ -37,7 +36,7 @@ function AddCabin() {
 //       </Button>
 //       {isOpenModal && (
 //         <Modal onClose={() => setIsOpenModal(false)}>
-//           <CreateCabinForm
+//           <CreateCategoryForm
 //           onCloseModal={() => setIsOpenModal(false)}
 //           />
 //         </Modal>
@@ -46,4 +45,4 @@ function AddCabin() {
 //   );
 // }
 
-export default AddCabin;
+export default AddCategory;

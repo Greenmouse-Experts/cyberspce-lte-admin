@@ -4,10 +4,11 @@ import { Flag } from "../../ui/Flag";
 import Button from "../../ui/Button";
 import { Link } from "react-router-dom";
 import CheckoutButton from "./CheckoutButton";
+import { formatCurrency } from "../../utils/helpers";
 
 const StyledTodayItem = styled.li`
   display: grid;
-  grid-template-columns: 9rem 2rem 1fr 7rem 9rem;
+  grid-template-columns: 9rem 1fr 7rem 9rem;
   gap: 1.2rem;
   align-items: center;
 
@@ -28,11 +29,11 @@ function TodayItem({ activity }) {
   const { id, status, guests, numNights } = activity;
   return (
     <StyledTodayItem>
-      {status === "unconfirmed" && <Tag type="green">Arriving</Tag>}
-      {status === "checked-in" && <Tag type="blue">Departing</Tag>}
-      <Flag src={guests.countryFlag} alt={`flag of ${guests.country}`} />
+      {status === "unconfirmed" && <Tag type="green">Delivered</Tag>}
+      {status === "checked-in" && <Tag type="blue">Ongoing</Tag>}
+      {/* <Flag src={guests.countryFlag} alt={`flag of ${guests.country}`} /> */}
       <Guest>{guests.fullName}</Guest>
-      <div>{numNights} nights</div>
+      <div>{formatCurrency(35)}</div>
       {status === "unconfirmed" && (
         <Button
           size="small"

@@ -15,6 +15,7 @@ const ChartBox = styled.div`
   background-color: var(--color-grey-0);
   border: 1px solid var(--color-grey-100);
   border-radius: var(--border-radius-md);
+  box-shadow:var(--shadow-sm);
 
   padding: 2.4rem 3.2rem;
   grid-column: 3 / span 2;
@@ -148,7 +149,7 @@ function DurationChart({ confirmedStays }) {
  
   return (
     <ChartBox>
-      <Heading as="h2">Stays duration summary</Heading>
+      <Heading as="h2">Product Statistics</Heading>
       <ResponsiveContainer width="100%" height={250}>
         <PieChart>
           <Pie
@@ -167,14 +168,14 @@ function DurationChart({ confirmedStays }) {
             ))}
           </Pie>
           <Tooltip />
-          <Legend
+          {/* <Legend
             verticalAlign="middle"
             align="right"
             width="30%"
             layout="vertical"
             iconSize={15}
             iconType="circle"
-          />
+          /> */}
         </PieChart>
       </ResponsiveContainer>
     </ChartBox>

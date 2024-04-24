@@ -16,6 +16,8 @@ const GlobalStyles = createGlobalStyle`
   --color-grey-800: #1f2937;
   --color-grey-900: #111827;
 
+  --color-white:#fff;
+
   --color-blue-100: #e0f2fe;
   --color-blue-700: #0369a1;
   --color-green-100: #dcfce7;
@@ -31,9 +33,10 @@ const GlobalStyles = createGlobalStyle`
   --color-red-700: #b91c1c;
   --color-red-800: #991b1b;
 
-  --backdrop-color: rgba(255, 255, 255, 0.1);
+  --backdrop-color:rgba(0, 0, 0, 0.5);
 
-  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.04);
+  --shadow-sm: 0 .125rem .25rem rgba(0,0,0,.075);
+  /* --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.04); */
   --shadow-md: 0px 0.6rem 2.4rem rgba(0, 0, 0, 0.06);
   --shadow-lg: 0 2.4rem 3.2rem rgba(0, 0, 0, 0.12);
   
@@ -54,6 +57,8 @@ const GlobalStyles = createGlobalStyle`
 --color-grey-700: #e5e7eb;
 --color-grey-800: #f3f4f6;
 --color-grey-900: #f9fafb;
+
+--color-white:#fff;
 
 --color-blue-100: #075985;
 --color-blue-700: #e0f2fe;
@@ -82,13 +87,15 @@ const GlobalStyles = createGlobalStyle`
   
   /* Indigo */
   --color-brand-50: #eef2ff;
-  --color-brand-100: #e0e7ff;
-  --color-brand-200: #c7d2fe;
-  --color-brand-500: #6366f1;
-  --color-brand-600: #4f46e5;
-  --color-brand-700: #4338ca;
-  --color-brand-800: #3730a3;
-  --color-brand-900: #312e81;
+  --color-brand-100: #66c4ff;
+  --color-brand-200: #4dbbff;
+  --color-brand-300: #33b1ff;
+  --color-brand-400: #33b1ff;
+  --color-brand-500: #009dff;
+  --color-brand-600: #0080cf;
+  --color-brand-700: #009dff;
+  --color-brand-800: #006eb3;
+  --color-brand-900: #005e99;
   
   --border-radius-tiny: 3px;
   --border-radius-sm: 5px;
@@ -188,6 +195,30 @@ img {
 `;
 
 export default GlobalStyles;
+
+
+const size = {
+  mobileS: "320px",
+  mobileM: "375px",
+  mobileL: "425px",
+  tablet: "768px",
+  tabletL: "820px",
+  laptop: "1024px",
+  laptopL: "1440px",
+  desktop: "2560px",
+};
+
+export const device = {
+  mobileS: `(min-width: ${size.mobileS})`,
+  mobileM: `(min-width: ${size.mobileM})`,
+  mobileL: `(min-width: ${size.mobileL})`,
+  tablet: `(min-width: ${size.tablet})`,
+  tabletL: `(min-width: ${size.tabletL})`,
+  laptop: `(min-width: ${size.laptop})`,
+  laptopL: `(min-width: ${size.laptopL})`,
+  desktop: `(min-width: ${size.desktop})`,
+  desktopL: `(min-width: ${size.desktop})`,
+};
 
 /*
 FOR DARK MODE

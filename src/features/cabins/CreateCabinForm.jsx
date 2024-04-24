@@ -8,6 +8,7 @@ import { useForm } from "react-hook-form";
 import FormRow from "../../ui/FormRow";
 import { useCreateCabin } from "./useCreateCabin";
 import { useEditCabin } from "./useEditCabin";
+import Select from "../../ui/Select";
 
 function CreateCabinForm({ cabinToEdit = {}, onCloseModal }) {
   const { id: editId, ...editValues } = cabinToEdit;
@@ -57,7 +58,7 @@ function CreateCabinForm({ cabinToEdit = {}, onCloseModal }) {
       onSubmit={handleSubmit(onSubmit, onError)}
       type={onCloseModal ? "modal" : "regular"}
     >
-      <FormRow label="cabin name" error={errors?.name?.message}>
+      <FormRow label="Product name" error={errors?.name?.message}>
         <Input
           type="text"
           id="name"
@@ -68,7 +69,7 @@ function CreateCabinForm({ cabinToEdit = {}, onCloseModal }) {
         />
       </FormRow>
 
-      <FormRow label="Maximum capicity" error={errors?.maxCapacity?.message}>
+      <FormRow label="Price" error={errors?.maxCapacity?.message}>
         <Input
           type="number"
           id="maxCapacity"
@@ -83,7 +84,7 @@ function CreateCabinForm({ cabinToEdit = {}, onCloseModal }) {
         />
       </FormRow>
 
-      <FormRow label="Regular price" error={errors?.regularPrice?.message}>
+      <FormRow label="Count in stock " error={errors?.regularPrice?.message}>
         <Input
           type="number"
           disabled={isWorking}
@@ -98,8 +99,18 @@ function CreateCabinForm({ cabinToEdit = {}, onCloseModal }) {
         />
       </FormRow>
 
-      <FormRow label="Discount" error={errors?.discount?.message}>
-        <Input
+      <FormRow label="Category" error={errors?.discount?.message}>
+        <Select
+        value="Router"
+        options={
+            [{
+              value: "router",
+              label: "router",
+            },
+            { value: "router", label: "router" }]
+          }
+        />
+        {/* <Input
           type="number"
           id="discount"
           disabled={isWorking}
@@ -109,7 +120,7 @@ function CreateCabinForm({ cabinToEdit = {}, onCloseModal }) {
               value < getValues().regularPrice ||
               "Discount should be less than the regular price",
           })}
-        />
+        /> */}
       </FormRow>
 
       <FormRow label="Description" error={errors?.description?.message}>
@@ -124,7 +135,7 @@ function CreateCabinForm({ cabinToEdit = {}, onCloseModal }) {
         />
       </FormRow>
 
-      <FormRow label="Cabin photo">
+      <FormRow label="Product images">
         <FileInput
           id="image"
           accept="image/*"
@@ -145,7 +156,7 @@ function CreateCabinForm({ cabinToEdit = {}, onCloseModal }) {
           Cancel
         </Button>
         <Button disabled={isWorking}>
-          {isEditSession ? "Edit Cabin" : "Create new cabin"}
+          {isEditSession ? "Edit Cabin" : "Add Product"}
         </Button>
       </FormRow>
     </Form>

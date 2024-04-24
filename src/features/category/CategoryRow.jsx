@@ -1,10 +1,10 @@
 import styled from "styled-components";
 import { formatCurrency } from "../../utils/helpers";
 
-import CreateCabinForm from "./CreateCabinForm";
-import { useDeleteCabin } from "./useDeleteCabin";
+import CreateCabinForm from "./CreateCategoryForm";
+import { useDeleteCabin } from "./useDeleteCategory";
 import { HiPencil, HiSquare2Stack, HiTrash } from "react-icons/hi2";
-import { useCreateCabin } from "./useCreateCabin";
+import { useCreateCabin } from "./useCreateCategory";
 import Modal from "../../ui/Modal";
 import ConfirmDelete from "../../ui/ConfirmDelete";
 import Table from "../../ui/Table";
@@ -49,7 +49,7 @@ const Discount = styled.div`
   color: var(--color-green-700);
 `;
 
-function CabinRow(cabin) {
+function CategoryRow(cabin) {
   const { isDeleting, deleteCabin } = useDeleteCabin();
   const { isCreating, createCabin } = useCreateCabin();
 
@@ -74,16 +74,8 @@ function CabinRow(cabin) {
 
   return (
     <Table.Row>
-      <Img src={image} />
-      <Cabin>Superfast</Cabin>
-      <Price>{formatCurrency(20000)}</Price>
-      <div>Router</div>
-
-      {discount ? (
-        <Discount>{formatCurrency(0)}</Discount>
-      ) : (
-        <span>&mdash;</span>
-      )}
+      <Cabin>Router</Cabin>
+      <Price>12-04-2024</Price>
       <div>
         <Modal>
           <Menus.Menu>
@@ -120,4 +112,4 @@ function CabinRow(cabin) {
   );
 }
 
-export default CabinRow;
+export default CategoryRow;

@@ -11,6 +11,7 @@ const StyledToday = styled.div`
   background-color: var(--color-grey-0);
   border: 1px solid var(--color-grey-100);
   border-radius: var(--border-radius-md);
+  box-shadow:var(--shadow-sm);
 
   padding: 3.2rem;
   display: flex;
@@ -44,7 +45,7 @@ function TodayActivity() {
   return (
     <StyledToday>
       <Row type="horizontal">
-        <Heading as="h2">Today</Heading>
+        <Heading as="h2">Latest Orders</Heading>
       </Row>
       {!isLoading ? (
         activities?.length > 0 ? (

@@ -6,6 +6,25 @@ import {
 } from "react-icons/hi2";
 import Stat from "./Stat";
 import { formatCurrency } from "../../utils/helpers";
+import { device } from "../../styles/GlobalStyles";
+import styled from "styled-components";
+
+
+const StyledStats = styled.div`
+  grid-column: 1 / span 4;
+  display: grid;
+  gap:20px ;
+  @media ${device.mobileL} {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  @media ${device.laptop} {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  grid-template-columns: 1fr;
+ 
+  
+`;
+
 
 function Stats({ bookings, confirmedStays, numDays, cabinCount }) {
   // 1.
@@ -23,10 +42,12 @@ function Stats({ bookings, confirmedStays, numDays, cabinCount }) {
     (numDays * cabinCount);
   // num checked in nights / all available nights (num days * num cabins)
 
+
+
   return (
-    <>
+    <StyledStats>
       <Stat
-        title="Bookings"
+        title="Orders"
         color="blue"
         icon={<HiOutlineBriefcase />}
         value={numBookings}
@@ -38,18 +59,18 @@ function Stats({ bookings, confirmedStays, numDays, cabinCount }) {
         value={formatCurrency(sales)}
       />
       <Stat
-        title="Check ins"
+        title="Products"
         color="indigo"
         icon={<HiOutlineCalendarDays />}
         value={checkins}
       />
-      <Stat
+      {/* <Stat
         title="Occupancy rate"
         color="yellow"
         icon={<HiOutlineChartBar />}
         value={Math.round(occupation * 100) + "%"}
-      />
-    </>
+      /> */}
+    </StyledStats>
   );
 }
 

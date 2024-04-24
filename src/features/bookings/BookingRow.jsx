@@ -73,27 +73,19 @@ function BookingRow({
 
   return (
     <Table.Row>
-      <Cabin>{cabinName}</Cabin>
+      <Cabin>{guestName}</Cabin>
 
       <Stacked>
-        <span>{guestName}</span>
         <span>{email}</span>
       </Stacked>
 
       <Stacked>
         <span>
-          {isToday(new Date(startDate))
-            ? "Today"
-            : formatDistanceFromNow(startDate)}{" "}
-          &rarr; {numNights} night stay
-        </span>
-        <span>
-          {format(new Date(startDate), "MMM dd yyyy")} &mdash;{" "}
-          {format(new Date(endDate), "MMM dd yyyy")}
+          {format(new Date(startDate), "MMM dd yyyy")}
         </span>
       </Stacked>
 
-      <Tag type={statusToTagName[status]}>{status.replace("-", " ")}</Tag>
+      <Tag type={statusToTagName[status]}>delivered</Tag>
 
       <Amount>{formatCurrency(totalPrice)}</Amount>
       <Modal>
@@ -102,14 +94,14 @@ function BookingRow({
           <Menus.List id={bookingId}>
             <Menus.Button
               icon={<HiEye />}
-              onClick={() => navigate(`/bookings/${bookingId}`)}
+              // onClick={() => navigate(`/orders/${bookingId}`)}
             >
               See details
             </Menus.Button>
             {status === "unconfirmed" && (
               <Menus.Button
                 disabled={isDeleting}
-                onClick={() => navigate(`/checkin/${bookingId}`)}
+                // onClick={() => navigate(`/orders/${bookingId}`)}
                 icon={<HiArrowDownOnSquare />}
               >
                 Check in

@@ -1,6 +1,16 @@
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
-import { HiOutlineCalendarDays, HiOutlineCog6Tooth, HiOutlineHome, HiOutlineHomeModern, HiOutlineUsers } from "react-icons/hi2";
+import {
+  HiOutlineCalendarDays,
+  HiOutlineCog6Tooth,
+  HiOutlineHome,
+  HiOutlineHomeModern,
+  HiOutlineUsers,
+} from "react-icons/hi2";
+import { IoBagOutline } from "react-icons/io5";
+import { FaBook, FaCartPlus, FaHandshake, FaList, FaUsers } from "react-icons/fa";
+import { FaBagShopping } from "react-icons/fa6";
+import { BiSolidShoppingBags } from "react-icons/bi";
 
 const NavList = styled.ul`
   display: flex;
@@ -28,7 +38,7 @@ const StyledNavLink = styled(NavLink)`
   &.active:link,
   &.active:visited {
     color: var(--color-grey-800);
-    background-color: var(--color-grey-50);
+    background-color: var(--color-grey-200);
     border-radius: var(--border-radius-sm);
   }
 
@@ -58,30 +68,53 @@ function MainNav() {
           </StyledNavLink>
         </li>
         <li>
+          <StyledNavLink to="/products">
+            <FaBagShopping />
+            <span>Products</span>
+          </StyledNavLink>
+        </li>
+        {/* <li>
           <StyledNavLink to="/bookings">
-            <HiOutlineCalendarDays />
-            <span>Bookings</span>
+            <FaCartPlus />
+            <span>Add Product</span>
+          </StyledNavLink>
+        </li> */}
+        <li>
+          <StyledNavLink to="/category">
+            <FaList />
+            <span>Category</span>
           </StyledNavLink>
         </li>
         <li>
-          <StyledNavLink to="/cabins">
-            <HiOutlineHomeModern />
-            <span>Cabins</span>
+          <StyledNavLink to="/orders">
+            <BiSolidShoppingBags />
+            <span>Orders</span>
           </StyledNavLink>
         </li>
         <li>
           <StyledNavLink to="/users">
-            <HiOutlineUsers />
+            <FaUsers />
             <span>Users</span>
           </StyledNavLink>
         </li>
         <li>
+          <StyledNavLink to="/">
+          <FaHandshake />
+            <span>Dealers</span>
+          </StyledNavLink>
+        </li>
+        <li>
+          <StyledNavLink to="/">
+          <FaBook />
+            <span>Blogs</span>
+          </StyledNavLink>
+        </li>
+        <li>
           <StyledNavLink to="/settings">
-            <HiOutlineCog6Tooth/>
+            <HiOutlineCog6Tooth />
             <span>Settings</span>
           </StyledNavLink>
         </li>
-       
       </NavList>
     </nav>
   );
