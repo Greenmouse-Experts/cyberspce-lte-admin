@@ -1,10 +1,10 @@
 import styled from "styled-components";
 import { formatCurrency } from "../../utils/helpers";
 
-import CreateCabinForm from "./CreateCabinForm";
-import { useDeleteCabin } from "./useDeleteCabin";
+import CreateCabinForm from "./CreateDealerForm";
+import { useDeleteCabin } from "./useDeleteDealer";
 import { HiPencil, HiSquare2Stack, HiTrash } from "react-icons/hi2";
-import { useCreateCabin } from "./useCreateCabin";
+import { useCreateCabin } from "./useCreateDealer";
 import Modal from "../../ui/Modal";
 import ConfirmDelete from "../../ui/ConfirmDelete";
 import Table from "../../ui/Table";
@@ -33,18 +33,20 @@ const Img = styled.img`
 
 const Cabin = styled.div`
   font-size: 1.6rem;
-  font-weight: 600;
+  font-weight: 500;
   color: var(--color-grey-600);
 `;
 
-const Price = styled.div``;
+const Price = styled.div`
+  font-weight: 500;
+`;
 
 const Discount = styled.div`
   font-weight: 500;
   color: var(--color-green-700);
 `;
 
-function CabinRow(cabin) {
+function DealerRow(cabin) {
   const { isDeleting, deleteCabin } = useDeleteCabin();
   const { isCreating, createCabin } = useCreateCabin();
 
@@ -70,12 +72,12 @@ function CabinRow(cabin) {
   return (
     <Table.Row>
       <Img src={image} />
-      <Cabin>Superfast</Cabin>
-      <Price>{formatCurrency(20000)}</Price>
-      <div>Router</div>
+      <Cabin>Acmesynergy Limited</Cabin>
+      <Price>Suite 14, Ogidan Shopping</Price>
+      <div>0903348585</div>
 
       {discount ? (
-        <Discount>{formatCurrency(0)}</Discount>
+        <Discount>12/04/2024</Discount>
       ) : (
         <span>&mdash;</span>
       )}
@@ -115,4 +117,4 @@ function CabinRow(cabin) {
   );
 }
 
-export default CabinRow;
+export default DealerRow;

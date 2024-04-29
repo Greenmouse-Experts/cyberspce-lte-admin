@@ -18,11 +18,12 @@ import { useNavigate } from "react-router-dom";
 import { useCheckOut } from "../check-in-out/useCheckout";
 import Modal from "../../ui/Modal";
 import ConfirmDelete from "../../ui/ConfirmDelete";
-import { useDeleteBooking } from "./useDeleteBooking";
+import { useDeleteBooking } from "./useDeleteUser";
+import UserDetail from "./UserDetail";
 
 const Cabin = styled.div`
   font-size: 1.6rem;
-  font-weight: 600;
+  font-weight: 500;
   color: var(--color-grey-600);
 `;
 
@@ -45,7 +46,7 @@ const Amount = styled.div`
   font-weight: 500;
 `;
 
-function BookingRow({
+function UserRow({
   booking: {
     id: bookingId,
     created_at,
@@ -77,30 +78,28 @@ function BookingRow({
         <span>{email}</span>
       </Stacked>
 
+      <Tag>09063744736</Tag>
       <Stacked>
         <span>{format(new Date(startDate), "MMM dd yyyy")}</span>
       </Stacked>
 
-      <Tag type={statusToTagName[status]}>delivered</Tag>
-
-      <Amount>{formatCurrency(totalPrice)}</Amount>
       <Modal>
         <Menus.Menu>
           <Menus.Toggle id={bookingId} />
           <Menus.List id={bookingId}>
-            <Menus.Button
-              icon={<HiEye />}
-              onClick={() => navigate(`/orders/${bookingId}`)}
-            >
-              See details
-            </Menus.Button>
+            <Modal.Open opens="user-detail">
+              <Menus.Button icon={<HiEye />}>See details</Menus.Button>
+            </Modal.Open>
             <Modal.Open opens="delete">
-              <Menus.Button icon={<HiTrash />}>Delete Booking</Menus.Button>
+              <Menus.Button icon={<HiTrash />}>Delete User</Menus.Button>
             </Modal.Open>
           </Menus.List>
+          <Modal.Window name="user-detail">
+            <UserDetail />
+          </Modal.Window>
           <Modal.Window name="delete">
             <ConfirmDelete
-              resourceName="booking"
+              resourceName="user"
               disabled={isDeleting}
               onConfirm={() => deleteBooking(bookingId)}
             />
@@ -111,4 +110,4 @@ function BookingRow({
   );
 }
 
-export default BookingRow;
+export default UserRow;

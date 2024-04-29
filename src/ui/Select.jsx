@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 const StyledSelect = styled.select`
-  font-size: 1.4rem;
+  font-size: 2rem;
   padding: 0.8rem 1.2rem;
   border: 1px solid
     ${(props) =>

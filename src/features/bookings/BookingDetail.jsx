@@ -48,7 +48,7 @@ function BookingDetail() {
     <>
       <Row type="horizontal">
         <HeadingGroup>
-          <Heading as="h1">Booking #{bookingId}</Heading>
+          <Heading as="h1">Order #{bookingId}</Heading>
           <Tag type={statusToTagName[status]}>{status.replace("-", " ")}</Tag>
         </HeadingGroup>
         <ButtonText onClick={moveBack}>&larr; Back</ButtonText>
@@ -58,8 +58,8 @@ function BookingDetail() {
 
       <ButtonGroup>
         {status === "unconfirmed" && (
-          <Button onClick={() => navigate(`/checkin/${bookingId}`)}>
-            Check in
+          <Button>
+           Mark as Delivered
           </Button>
         )}
         {status === "checked-in" && (
@@ -70,18 +70,18 @@ function BookingDetail() {
             disabled={isCheckingOut}
             icon={<HiArrowUpOnSquare />}
           >
-            Check out
+            Marked as shipped
           </Button>
         )}
         <Modal>
           <Modal.Open opens="delete">
             <Button variation="danger" icon={<HiTrash />}>
-              Delete Booking
+              Delete Order
             </Button>
           </Modal.Open>
           <Modal.Window name="delete">
             <ConfirmDelete
-              resourceName="booking"
+              resourceName="order"
               disabled={isDeleting}
               onConfirm={() =>
                 deleteBooking(bookingId, {

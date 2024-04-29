@@ -1,7 +1,7 @@
 import Heading from "../ui/Heading";
 import Row from "../ui/Row";
-import BookingTable from "../features/bookings/BookingTable";
 import BookingTableOperations from "../features/bookings/BookingTableOperations";
+import OrderTable from "../features/bookings/OrderTable";
 
 function Bookings() {
   return (
@@ -10,7 +10,7 @@ function Bookings() {
         <Heading as="h1">All Orders</Heading>
         <BookingTableOperations />
       </Row>
-      <BookingTable />
+      <OrderTable />
     </>
   );
 }

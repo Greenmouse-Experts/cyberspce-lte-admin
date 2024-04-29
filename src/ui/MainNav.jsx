@@ -92,25 +92,25 @@ function MainNav() {
           </StyledNavLink>
         </li>
         <li>
-          <StyledNavLink to="/users">
+          <StyledNavLink to="/customers">
             <FaUsers />
-            <span>Users</span>
+            <span>Customers</span>
           </StyledNavLink>
         </li>
         <li>
-          <StyledNavLink to="/">
+          <StyledNavLink to="/dealers">
           <FaHandshake />
             <span>Dealers</span>
           </StyledNavLink>
         </li>
-        <li>
-          <StyledNavLink to="/">
+        {/* <li>
+          <StyledNavLink to="/blogs">
           <FaBook />
             <span>Blogs</span>
           </StyledNavLink>
-        </li>
+        </li> */}
         <li>
-          <StyledNavLink to="/settings">
+          <StyledNavLink to="/account">
             <HiOutlineCog6Tooth />
             <span>Settings</span>
           </StyledNavLink>

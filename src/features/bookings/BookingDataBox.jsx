@@ -4,13 +4,17 @@ import {
   HiOutlineChatBubbleBottomCenterText,
   HiOutlineCheckCircle,
   HiOutlineCurrencyDollar,
-  HiOutlineHomeModern,
 } from "react-icons/hi2";
 
 import DataItem from "../../ui/DataItem";
 import { Flag } from "../../ui/Flag";
+import Select from "../../ui/Select";
 
 import { formatDistanceFromNow, formatCurrency } from "../../utils/helpers";
+import { FaMapMarkerAlt, FaTruck, FaUserCircle } from "react-icons/fa";
+import Table from "../../ui/Table";
+import BookingRow from "./BookingRow";
+import { useState } from "react";
 
 const StyledBookingDataBox = styled.section`
   /* Box */
@@ -22,7 +26,7 @@ const StyledBookingDataBox = styled.section`
 `;
 
 const Header = styled.header`
-  background-color: var(--color-brand-500);
+  background-color: var(--color-brand-700);
   padding: 2rem 4rem;
   color: #e0e7ff;
   font-size: 1.8rem;
@@ -45,7 +49,6 @@ const Header = styled.header`
   }
 
   & span {
-    font-family: "Sono";
     font-size: 2rem;
     margin-left: 4px;
   }
@@ -55,9 +58,15 @@ const Section = styled.section`
   padding: 3.2rem 4rem 1.2rem;
 `;
 
-const Guest = styled.div`
+const CustomerDetails = styled.div`
   display: flex;
+  justify-content: space-between;
   align-items: center;
+`;
+
+const Customer = styled.div`
+  display: flex;
+  align-items: start;
   gap: 1.2rem;
   margin-bottom: 1.6rem;
   color: var(--color-grey-500);
@@ -96,9 +105,14 @@ const Price = styled.div`
 
 const Footer = styled.footer`
   padding: 1.6rem 4rem;
-  font-size: 1.2rem;
-  color: var(--color-grey-500);
+  font-size: 2rem;
+  color: var(--color-black);
   text-align: right;
+
+  span {
+    margin-left: 1rem;
+    font-weight: 500;
+  }
 `;
 
 // A purely presentational component
@@ -106,59 +120,95 @@ function BookingDataBox({ booking }) {
   const {
     created_at,
     startDate,
-    endDate,
-    numNights,
-    numGuests,
-    cabinPrice,
-    extraPrices,
-    totalPrice,
-    hasBreakfast,
-    observations,
-    isPaid,
-    guests: {
-      fullName: guestName,
-      email,
-      country,
-      countryFlag,
-      nationalID,
-    } = {},
+    guests: { fullName: guestName, email } = {},
     cabins: { name: cabinName } = {},
   } = booking;
 
+  const [selectedValue, setSelectedValue] = useState("");
 
+  // Function to handle change in the Select component
+  const handleSelectChange = (event) => {
+    const newValue = event.target.value;
+    setSelectedValue(newValue);
+    // You can perform any other actions here based on the selected value
+  };
 
   return (
     <StyledBookingDataBox>
       <Header>
-        <div>
+        {/* <div>
           <HiOutlineHomeModern />
           <p>
             {numNights} nights in Cabin <span>{cabinName}</span>
           </p>
-        </div>
+        </div> */}
 
-        <p>
-          {format(new Date(startDate), "EEE, MMM dd yyyy")} (
-          {isToday(new Date(startDate))
-            ? "Today"
-            : formatDistanceFromNow(startDate)}
-          ) &mdash; {format(new Date(endDate), "EEE, MMM dd yyyy")}
-        </p>
+        <p>{format(new Date(startDate), "EEE, MMM dd yyyy")}</p>
+
+        <Select
+          style={{ color: "black", width: "30rem", height: "5rem" }}
+          value={selectedValue}
+          onChange={handleSelectChange}
+          options={[
+            {
+              value: "Change status",
+              label: "Change status",
+            },
+            { value: "Awaiting payment", label: "Awaiting payment" },
+            { value: "confirmed", label: "confirmed" },
+            { value: "Shipped", label: "Shipped" },
+            { value: "Delivered", label: "Delivered" },
+          ]}
+        />
       </Header>
 
       <Section>
-        <Guest>
-          {countryFlag && <Flag src={countryFlag} alt={`Flag of ${country}`} />}
-          <p>
-            {guestName} {numGuests > 1 ? `+ ${numGuests - 1} guests` : ""}
-          </p>
-          <span>&bull;</span>
-          <p>{email}</p>
-          <span>&bull;</span>
-          <p>National ID {nationalID}</p>
-        </Guest>
+        <CustomerDetails>
+          <Customer>
+            <FaUserCircle size={40} />
+            <div>
+              <p>{guestName}</p>
+              <p>{email}</p>
+            </div>
+          </Customer>
+          <Customer>
+            <FaTruck size={40} />
+            <div>
+              <p>Order Info</p>
+              <p>Shipping: Nigeria</p>
+              <p>Payment method: Flutterwave</p>
+            </div>
+          </Customer>
+          <Customer>
+            <FaMapMarkerAlt size={40} />
+            <div>
+              <p>Delivered To</p>
+              <p>123 road ogba, ikeja </p>
+            </div>
+          </Customer>
+        </CustomerDetails>
+        <Table columns="2fr 1.4fr 1fr 1.4fr 1fr 3.2rem">
+          <Table.Header>
+            <div>Product</div>
+            <div>Unit</div>
+            <div>Quantity</div>
+            <div>Total</div>
+          </Table.Header>
 
-        {observations && (
+          <Table.Body
+            data={["jsj"]}
+            render={(booking) => (
+              <Table.Row>
+                <p>router</p>
+                <p>2</p>
+                <p>5</p>
+                <p>{formatCurrency(4500)}</p>
+              </Table.Row>
+            )}
+          />
+        </Table>
+
+        {/* {observations && (
           <DataItem
             icon={<HiOutlineChatBubbleBottomCenterText />}
             label="Observations"
@@ -169,9 +219,9 @@ function BookingDataBox({ booking }) {
 
         <DataItem icon={<HiOutlineCheckCircle />} label="Breakfast included?">
           {hasBreakfast ? "Yes" : "No"}
-        </DataItem>
+        </DataItem> */}
 
-        <Price isPaid={isPaid}>
+        {/* <Price isPaid={isPaid}>
           <DataItem icon={<HiOutlineCurrencyDollar />} label={`Total price`}>
             {formatCurrency(totalPrice)}
 
@@ -182,11 +232,21 @@ function BookingDataBox({ booking }) {
           </DataItem>
 
           <p>{isPaid ? "Paid" : "Will pay at property"}</p>
-        </Price>
+        </Price> */}
       </Section>
 
       <Footer>
-        <p>Booked {format(new Date(created_at), "EEE, MMM dd yyyy, p")}</p>
+        <p>
+          Sub Total: <span>{formatCurrency(3500)}</span>{" "}
+        </p>
+        <p>
+          {" "}
+          Shipping Cost: <span>{formatCurrency(1500)}</span>
+        </p>
+        <p>
+          Grand Total: <span>{formatCurrency(4500)}</span>
+        </p>
+        <p>Sold {format(new Date(created_at), "EEE, MMM dd yyyy, p")}</p>
       </Footer>
     </StyledBookingDataBox>
   );

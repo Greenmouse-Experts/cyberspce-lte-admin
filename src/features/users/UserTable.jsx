@@ -1,13 +1,14 @@
-import BookingRow from "./BookingRow";
+
 import Table from "../../ui/Table";
 import Menus from "../../ui/Menus";
 import Empty from "../../ui/Empty";
-import { useBookings } from "./useBookings";
+import { useBookings } from "./useUsers";
 import Spinner from "../../ui/Spinner"; 
 import Pagination from "../../ui/Pagination";
+import UserRow from "./UserRow";
 
 
-function BookingTable() {
+function UserTable() {
   const {bookings, isLoading, count} = useBookings();
 
   if(isLoading) return <Spinner/>
@@ -19,17 +20,16 @@ function BookingTable() {
       <Table columns="2fr 1.4fr 1fr 1.4fr 1fr 3.2rem">
         <Table.Header>
           <div>Name</div>
-          <div>User</div>
+          <div>Email</div>
+          <div>Phone</div>
           <div>Dates</div>
-          <div>Status</div>
-          <div>Amount</div>
           <div></div>
         </Table.Header>
 
         <Table.Body
           data={bookings}
           render={(booking) => (
-            <BookingRow key={booking.id} booking={booking} />
+            <UserRow key={booking.id} booking={booking} />
           )}
         />
         <Table.Footer>
@@ -40,4 +40,4 @@ function BookingTable() {
   );
 }
 
-export default BookingTable;
+export default UserTable;
