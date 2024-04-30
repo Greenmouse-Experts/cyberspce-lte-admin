@@ -1,20 +1,20 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { createEditCabin } from "../../services/apiCabins";
 import toast from "react-hot-toast";
+import { updateCategory } from "../../services/apis/category-api";
 
-export function useEditCabin() {
+export function useEditCategory() {
   const queryClient = useQueryClient();
 
-  const { mutate: editCabin, isLoading: isEditing } = useMutation({
-    mutationFn: ({ newCabinData, id }) => createEditCabin(newCabinData, id),
+  const { mutate: editCat, isLoading: isEditing } = useMutation({
+    mutationFn: ({ newCabinData, id }) => updateCategory(id, newCabinData),
     onSuccess: () => {
       toast.success("Category successfully updated");
-      queryClient.invalidateQueries({ queryKey: ["cabins"] });
+      queryClient.invalidateQueries({ queryKey: ["category"] });
     },
     onError: (error) => {
       toast.error(error.message);
     },
   });
 
-  return { isEditing, editCabin };
+  return { isEditing, editCat };
 }

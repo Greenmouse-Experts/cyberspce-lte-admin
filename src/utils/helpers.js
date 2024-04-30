@@ -28,3 +28,48 @@ export const formatCurrency = (value) =>
     new Intl.NumberFormat('en', { style: 'currency', currency: 'NGN' }).format(
       value
     ).replace('NGN', '₦');
+
+    const convertToBase64 = (file) => {
+      return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = () => resolve(reader.result);
+        reader.onerror = (error) => reject(error);
+      });
+    };
+  
+    // Function to convert array of image files to Base64 array
+    export const convertArrayToBase64 = async (fileArray) => {
+      const promises = fileArray.map((file) => convertToBase64(file));
+      const base64Results = await Promise.all(promises);
+      return base64Results;
+    };
+    export const handleImageConvert = (e) => {
+      console.log(e);
+      const files = Array.from(e);
+  
+      Promise.all(
+        files.map((file) => {
+          return new Promise((resolve, reject) => {
+            const reader = new FileReader();
+  
+            reader.onload = (event) => {
+              resolve(event.target.result);
+            };
+  
+            reader.onerror = (error) => {
+              reject(error);
+            };
+  
+            reader.readAsDataURL(file);
+          });
+        })
+      )
+        .then((base64Array) => {
+          return base64Array;
+        })
+        .catch((error) => {
+          console.error('Error reading files:', error);
+        });
+    };
+  

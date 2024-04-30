@@ -1,5 +1,7 @@
 import styled from "styled-components";
 import { useUser } from "./useUser";
+import useAuth from "../../hooks/useAuth";
+import ProfileAvatar from "../../ui/ProfileAvatar";
 
 const StyledUserAvatar = styled.div`
   display: flex;
@@ -22,17 +24,13 @@ const Avatar = styled.img`
 `;
 
 function UserAvatar() {
-  const { user } = useUser();
-  console.log(user.user_metadata);
-  const { fullName, avatar } = user.user_metadata;
+  const { user } = useAuth();
+  const { firstName, lastName, image  } = user;
 
   return (
     <StyledUserAvatar>
-      <Avatar
-        src={avatar || "default-user.jpg"}
-        alt={`Avater of ${fullName}`}
-      />
-      <span>{fullName}</span>
+      <ProfileAvatar fname={firstName} lname={lastName} url={image} size={50} font={18}/>
+      <span>{`${firstName} ${lastName}`}</span>
     </StyledUserAvatar>
   );
 }

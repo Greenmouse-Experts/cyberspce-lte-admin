@@ -1,36 +1,31 @@
 import Input from "../../ui/Input";
 import Form from "../../ui/Form";
 import Button from "../../ui/Button";
-import FileInput from "../../ui/FileInput";
-import Textarea from "../../ui/Textarea";
 import { useForm } from "react-hook-form";
 
 import FormRow from "../../ui/FormRow";
-import { useCreateCabin } from "./useCreateCategory";
-import { useEditCabin } from "./useEditCategory";
-import Select from "../../ui/Select";
+import { useCreateCategory } from "./useCreateCategory";
+import {  useEditCategory } from "./useEditCategory";
 
 function CreateCategoryForm({ cabinToEdit = {}, onCloseModal }) {
   const { id: editId, ...editValues } = cabinToEdit;
 
   const isEditSession = Boolean(editId);
-  const { register, handleSubmit, reset, getValues, formState } = useForm({
+  const { register, handleSubmit, reset, formState } = useForm({
     defaultValues: isEditSession ? editValues : {},
   });
 
   const { errors } = formState;
 
-  const { createCabin, isCreating } = useCreateCabin();
-  const { isEditing, editCabin } = useEditCabin();
+  const { createCat, isCreating } = useCreateCategory();
+  const { isEditing, editCat } = useEditCategory();
 
   const isWorking = isCreating || isEditing;
 
   const onSubmit = (data) => {
-    const image = typeof data.image === "string" ? data.image : data.image[0];
-
     if (isEditSession)
-      editCabin(
-        { newCabinData: { ...data, image }, id: editId },
+      editCat(
+        { newCabinData: {name: data.name, display: 1}, id: editId },
         {
           onSuccess: (data) => {
             reset();
@@ -39,8 +34,8 @@ function CreateCategoryForm({ cabinToEdit = {}, onCloseModal }) {
         }
       );
     else
-      createCabin(
-        { ...data, image: image },
+      createCat(
+        { ...data},
         {
           onSuccess: (data) => {
             reset();
@@ -64,7 +59,7 @@ function CreateCategoryForm({ cabinToEdit = {}, onCloseModal }) {
           id="name"
           disabled={isWorking}
           {...register("name", {
-            required: "Cabin name is required",
+            required: "Category name is required",
           })}
         />
       </FormRow>
