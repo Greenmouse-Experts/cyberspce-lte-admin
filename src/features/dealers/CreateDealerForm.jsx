@@ -2,13 +2,11 @@ import Input from "../../ui/Input";
 import Form from "../../ui/Form";
 import Button from "../../ui/Button";
 import FileInput from "../../ui/FileInput";
-import Textarea from "../../ui/Textarea";
 import { useForm } from "react-hook-form";
 
 import FormRow from "../../ui/FormRow";
-import { useCreateCabin } from "./useCreateDealer";
-import { useEditCabin } from "./useEditDealer";
-import Select from "../../ui/Select";
+import {  useCreatePlans } from "./useCreateDealer";
+import { useEditPlan } from "./useEditDealer";
 
 function CreateDealerForm({ cabinToEdit = {}, onCloseModal }) {
   const { id: editId, ...editValues } = cabinToEdit;
@@ -20,17 +18,22 @@ function CreateDealerForm({ cabinToEdit = {}, onCloseModal }) {
 
   const { errors } = formState;
 
-  const { createCabin, isCreating } = useCreateCabin();
-  const { isEditing, editCabin } = useEditCabin();
+  const { createPlan, isCreating } = useCreatePlans();
+  const { isEditing, editPlan} = useEditPlan();
 
   const isWorking = isCreating || isEditing;
 
   const onSubmit = (data) => {
-    const image = typeof data.image === "string" ? data.image : data.image[0];
-
+    const payload = {
+      name: data?.name,
+      price: data?.price,
+      validity: data?.validity,
+      avalibilty_hour: data?.avalibilty_hour,
+      avalibilty_day: data?.avalibilty_day,
+    }
     if (isEditSession)
-      editCabin(
-        { newCabinData: { ...data, image }, id: editId },
+      editPlan(
+        { payload: payload , id: editId},
         {
           onSuccess: (data) => {
             reset();
@@ -39,8 +42,8 @@ function CreateDealerForm({ cabinToEdit = {}, onCloseModal }) {
         }
       );
     else
-      createCabin(
-        { ...data, image: image },
+      createPlan(
+        { ...data},
         {
           onSuccess: (data) => {
             reset();
@@ -58,38 +61,49 @@ function CreateDealerForm({ cabinToEdit = {}, onCloseModal }) {
       onSubmit={handleSubmit(onSubmit, onError)}
       type={onCloseModal ? "modal" : "regular"}
     >
-      <FormRow label="Dealer name" error={errors?.name?.message}>
+      <FormRow label="Plan name" error={errors?.name?.message}>
         <Input
           type="text"
           id="name"
           disabled={isWorking}
           {...register("name", {
-            required: "Cabin name is required",
+            required: "Plan name is required",
           })}
         />
       </FormRow>
 
-      <FormRow label="Phone" error={errors?.maxCapacity?.message}>
+      <FormRow label="Price" error={errors?.maxCapacity?.message}>
         <Input
-          type="text"
-          id="maxCapacity"
+          type="number"
+          id="price"
           disabled={isWorking}
-          {...register("maxCapacity", {
+          {...register("price", {
             required: "This field is required",
-            min: {
-              value: 1,
-              message: "Maximum capacity needs to be at least 1",
-            },
           })}
         />
       </FormRow>
 
-      <FormRow label="Address" error={errors?.regularPrice?.message}>
+      <FormRow label="Validity" error={errors?.display?.message}>
+          <select
+            {...register("validity", {
+              required: "This field is required",
+            })}
+            name="validity"
+            className="border border-gray-300 rounded-lg w-[240px] py-3 p-2 "
+          >
+            <option value="">Select an option</option>
+            <option value="weekly">Weekly</option>
+            <option value="monthly">Monthly</option>
+            <option value="annually">Annually</option>
+          </select>
+        </FormRow>
+
+      <FormRow label="Avalibilty Hour" error={errors?.regularPrice?.message}>
         <Input
-          type="text"
+          type="number"
           disabled={isWorking}
-          id="regularPrice"
-          {...register("regularPrice", {
+          id="avalibilty_hour"
+          {...register("avalibilty_hour", {
             required: "This field is required",
             min: {
               value: 1,
@@ -98,17 +112,17 @@ function CreateDealerForm({ cabinToEdit = {}, onCloseModal }) {
           })}
         />
       </FormRow>
-
-
-      <FormRow label="
-      
-      Dealer images">
-        <FileInput
-          id="image"
-          accept="image/*"
+      <FormRow label="Avalibilty Day" error={errors?.regularPrice?.message}>
+        <Input
+          type="number"
           disabled={isWorking}
-          {...register("image", {
-            required: isEditSession ? false : "This field is required",
+          id="avalibilty_day"
+          {...register("avalibilty_day", {
+            required: "This field is required",
+            min: {
+              value: 1,
+              message: "Price needs to be at least 1",
+            },
           })}
         />
       </FormRow>
@@ -123,7 +137,7 @@ function CreateDealerForm({ cabinToEdit = {}, onCloseModal }) {
           Cancel
         </Button>
         <Button disabled={isWorking}>
-          {isEditSession ? "Edit Dealer" : "Add dealer"}
+          {isEditSession ? "Edit Data Plan" : "Add Data Plan"}
         </Button>
       </FormRow>
     </Form>

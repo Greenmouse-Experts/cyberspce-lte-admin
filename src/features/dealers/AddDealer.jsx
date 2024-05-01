@@ -1,7 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 import Button from "../../ui/Button";
 import CreateDealerForm from "./CreateDealerForm";
-import DealerTable from "./DealerTable";
 import Modal from "../../ui/Modal";
 
 function AddDealer() {
@@ -9,7 +8,7 @@ function AddDealer() {
     <div>
       <Modal>
         <Modal.Open opens="dealer-form">
-          <Button>Add Dealer</Button>
+          <Button>Add Data Plans</Button>
         </Modal.Open>
 
         <Modal.Window name="dealer-form">

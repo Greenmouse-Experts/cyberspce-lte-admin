@@ -14,8 +14,9 @@ export const createProduct = async (payload) => {
 };
 
 export const updateProduct = async (id, payload) => {
+  console.log(payload, id);
   return axios
-    .post(`/product/update/${id}`, payload)
+    .post(`/product/${id}/update`, payload)
     .then((response) => response.data);
 };
 

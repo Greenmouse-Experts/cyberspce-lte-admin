@@ -6,7 +6,7 @@ export function useEditProduct() {
   const queryClient = useQueryClient();
 
   const { mutate: editProduct, isLoading: isEditing } = useMutation({
-    mutationFn: ({ newProductData, id }) => updateProduct(newProductData, id),
+  mutationFn: ({payload, id}) => updateProduct(id, payload),
     onSuccess: () => {
       toast.success("Product successfully updated");
       queryClient.invalidateQueries({ queryKey: ["products"] });

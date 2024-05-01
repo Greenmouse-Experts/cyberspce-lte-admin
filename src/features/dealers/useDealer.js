@@ -1,16 +1,16 @@
 import { useQuery } from "@tanstack/react-query";
-import { getCabins } from "../../services/apiCabins";
+import { getPlansApi } from "../../services/apis/plans-api";
 
-export function useCabins(){
+export function usePlans(){
     const {
         isLoading,
-        data: cabins,
+        data: plans,
         error,
       } = useQuery({
-        queryKey: ["cabins"],
-        queryFn: getCabins,
+        queryKey: ["plans"],
+        queryFn: getPlansApi,
       });
 
-      return {isLoading, cabins, error}
+      return {isLoading, plans, error}
       
 }

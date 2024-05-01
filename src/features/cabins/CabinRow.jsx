@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { formatCurrency } from "../../utils/helpers";
 
 import CreateCabinForm from "./CreateCabinForm";
-import { useDeleteCabin } from "./useDeleteCabin";
+import { useDeleteProduct } from "./useDeleteCabin";
 import { HiPencil, HiTrash } from "react-icons/hi2";
 import Modal from "../../ui/Modal";
 import ConfirmDelete from "../../ui/ConfirmDelete";
@@ -33,7 +33,7 @@ const Discount = styled.div`
 `;
 
 function CabinRow({ cabin }) {
-  const { isDeleting, deleteCabin } = useDeleteCabin();
+  const { isDeleting, deleteProd } = useDeleteProduct();
 
   const {
     id: cabinId,
@@ -101,7 +101,7 @@ function CabinRow({ cabin }) {
               <ConfirmDelete
                 resourceName="cabins"
                 disabled={isDeleting}
-                onConfirm={() => deleteCabin(cabinId)}
+                onConfirm={() => deleteProd(cabinId)}
               />
             </Modal.Window>
           </Menus.Menu>

@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import Spinner from "../../ui/Spinner";
-import { useCabins } from "./useDealer";
+import {usePlans } from "./useDealer";
 import Table from "../../ui/Table";
 import Menus from "../../ui/Menus";
 import { useSearchParams } from "react-router-dom";
@@ -23,46 +23,47 @@ const TableHeader = styled.header`
 `;
 
 function DealerTable() {
-  const { isLoading, cabins } = useCabins();
+  const { isLoading, plans } = usePlans();
   const [searchParams] = useSearchParams();
 
   if (isLoading) return <Spinner />;
-  if(!cabins.length) return <Empty resourceName="cabins"/>
+  if(!plans?.data?.length) return <Empty resourceName="plans"/>
   //FILTER
-  const filterValue = searchParams.get("discount") || "all";
+  // const filterValue = searchParams.get("discount") || "all";
 
-  let filteredCabins;
-  if (filterValue === "all") filteredCabins = cabins;
-  if (filterValue === "no-discount")
-    filteredCabins = cabins.filter((cabin) => cabin.discount === 0);
-  if (filterValue === "with-discount")
-    filteredCabins = cabins.filter((cabin) => cabin.discount > 0);
+  // let filteredCabins;
+  // if (filterValue === "all") filteredCabins = cabins;
+  // if (filterValue === "no-discount")
+  //   filteredCabins = cabins.filter((cabin) => cabin.discount === 0);
+  // if (filterValue === "with-discount")
+  //   filteredCabins = cabins.filter((cabin) => cabin.discount > 0);
 
   //SORT
 
-  const sortBy = searchParams.get("sortBy") || "startDate-asc";
+  // const sortBy = searchParams.get("sortBy") || "startDate-asc";
 
-  const [field, direction] = sortBy.split("-");
-  const modifier = direction === "asc" ? 1 : -1;
-  const sortedCabins = filteredCabins.sort(
-    (a, b) => (a[field] - b[field]) * modifier
-  );
+  // const [field, direction] = sortBy.split("-");
+  // const modifier = direction === "asc" ? 1 : -1;
+  // const sortedCabins = filteredCabins.sort(
+  //   (a, b) => (a[field] - b[field]) * modifier
+  // );
 
   return (
     <Menus>
-      <Table columns="0.6fr 1.8fr 2.2fr 1fr 1fr 1fr">
+      <Table columns="1.4fr 0.8fr 1fr 1.6fr 1.6fr 1fr 0.6fr">
         <Table.Header>
-          <div></div>
           <div>Name</div>
-          <div>address</div>
-          <div>phone number</div>
-          <div>date</div>
-          <div></div>
+          <div>Price</div>
+          <div>Validity</div>
+          <div>Available Hour</div>
+          <div>Available Day</div>
+          <div>Created At</div>
+          <div>Action</div>
         </Table.Header>
         <Table.Body
           //data={cabins}
           // data={filteredCabins}
-          data={sortedCabins}
+          data={plans?.data}
           render={(cabin) => <DealerRow cabin={cabin} key={cabin.id} />}
         />
         {/* {cabins.map()} */}

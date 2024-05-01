@@ -10,7 +10,7 @@ function Dealers() {
   return (
     <>
        <Row type="horizontal">
-        <Heading as="h1">All Dealers</Heading>
+        <Heading as="h1">All Data Plans</Heading>
         {/* <DealerTableOperations/> */}
         <AddDealer />
       </Row>

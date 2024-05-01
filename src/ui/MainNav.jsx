@@ -100,7 +100,7 @@ function MainNav() {
         <li>
           <StyledNavLink to="/dealers">
           <FaHandshake />
-            <span>Dealers</span>
+            <span>Data Plans</span>
           </StyledNavLink>
         </li>
         {/* <li>

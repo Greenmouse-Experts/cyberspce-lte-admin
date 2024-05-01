@@ -2,17 +2,17 @@ import BookingRow from "./BookingRow";
 import Table from "../../ui/Table";
 import Menus from "../../ui/Menus";
 import Empty from "../../ui/Empty";
-import { useBookings } from "./useBookings";
+import { useOrders } from "./useBookings";
 import Spinner from "../../ui/Spinner"; 
 import Pagination from "../../ui/Pagination";
 
 
 function OrderTable() {
-  const {bookings, isLoading, count} = useBookings();
+  const {orders, isLoading, count} = useOrders();
 
   if(isLoading) return <Spinner/>
 
-  if(!bookings.length) return <Empty resourceName="bookings"/>
+  if(!orders?.data?.length) return <Empty resourceName="orders"/>
 
   return (
     <Menus>
@@ -27,13 +27,13 @@ function OrderTable() {
         </Table.Header>
 
         <Table.Body
-          data={bookings}
+          data={orders?.data}
           render={(booking) => (
             <BookingRow key={booking.id} booking={booking} />
           )}
         />
         <Table.Footer>
-          <Pagination count={count}/>
+          <Pagination count={1}/>
         </Table.Footer>
       </Table>
     </Menus>

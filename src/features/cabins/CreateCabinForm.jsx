@@ -4,8 +4,8 @@ import Button from "../../ui/Button";
 import FileInput from "../../ui/FileInput";
 import Textarea from "../../ui/Textarea";
 import { useForm } from "react-hook-form";
-import ReactQuill from 'react-quill';
-import 'react-quill/dist/quill.snow.css';
+import ReactQuill from "react-quill";
+import "react-quill/dist/quill.snow.css";
 import FormRow from "../../ui/FormRow";
 import { useCreateProduct } from "./useCreateCabin";
 import { useEditProduct } from "./useEditCabin";
@@ -16,8 +16,8 @@ import { convertArrayToBase64 } from "../../utils/helpers";
 
 function CreateCabinForm({ cabinToEdit = {}, onCloseModal }) {
   const { id: editId, specification, ...editValues } = cabinToEdit;
-  const [specs, setSpecs] = useState(specification || '');
-  const [images, setImages] = useState([])
+  const [specs, setSpecs] = useState(specification || "");
+  const [images, setImages] = useState([]);
   const isEditSession = Boolean(editId);
   const { register, handleSubmit, reset, getValues, formState } = useForm({
     defaultValues: isEditSession ? editValues : {},
@@ -31,21 +31,31 @@ function CreateCabinForm({ cabinToEdit = {}, onCloseModal }) {
   const isWorking = isCreating || isEditing;
   const handleImages = (item) => {
     convertArrayToBase64(Array.from(item)).then((base64Array) => {
-       setImages(base64Array) // Array of Base64 strings
-    })
-  }
+      setImages(base64Array); // Array of Base64 strings
+    });
+  };
   const onSubmit = (data) => {
     const payload = {
       ...data,
       images: images,
       specification: specs,
       dealer_id: 0,
-      description: data?.coverage
+      description: data?.coverage,
+    };
+    const editPayload = {
+      category_id: data?.category_id,
+      count_in_stock: data?.count_in_stock,
+      coverage: data?.coverage,
+      dealer_id: 0,
+      description: data?.coverage,
+      display: data?.display,
+      price: data?.price,
+      product_name: data?.product_name,
+      specification: specs,
     }
-    console.log(payload);
-    if (isEditSession)
+    if (isEditSession){
       editProduct(
-        { newCabinData: { ...data}, id: editId },
+        { payload: editPayload , id: editId},
         {
           onSuccess: (data) => {
             reset();
@@ -53,16 +63,14 @@ function CreateCabinForm({ cabinToEdit = {}, onCloseModal }) {
           },
         }
       );
+    }
     else
-      createProd(
-        payload,
-        {
-          onSuccess: (data) => {
-            reset();
-            onCloseModal?.();
-          },
-        }
-      );
+      createProd(payload, {
+        onSuccess: (data) => {
+          reset();
+          onCloseModal?.();
+        },
+      });
   };
   const onError = (error) => {
     console.log(error);
@@ -104,7 +112,10 @@ function CreateCabinForm({ cabinToEdit = {}, onCloseModal }) {
           />
         </FormRow>
 
-        <FormRow label="Count in stock " error={errors?.count_in_stock?.message}>
+        <FormRow
+          label="Count in stock "
+          error={errors?.count_in_stock?.message}
+        >
           <Input
             type="number"
             disabled={isWorking}
@@ -136,7 +147,12 @@ function CreateCabinForm({ cabinToEdit = {}, onCloseModal }) {
 
         <div className="lg:col-span-2 pb-[65px] border-b">
           <p className="mb-3 mt-4">Specifications</p>
-        <ReactQuill theme="snow" value={specs} onChange={setSpecs} className={'h-36'}/>
+          <ReactQuill
+            theme="snow"
+            value={specs}
+            onChange={setSpecs}
+            className={"h-36"}
+          />
         </div>
 
         <FormRow label="Publish" error={errors?.display?.message}>
@@ -165,20 +181,20 @@ function CreateCabinForm({ cabinToEdit = {}, onCloseModal }) {
           />
         </FormRow>
 
-       <div className="lg:col-span-2 mt-4">
-       <FormRow label="Product images">
-          <FileInput
-            id="image"
-            accept="image/*"
-            disabled={isWorking}
-            multiple
-            onChange={e => handleImages(e.target.files)}
-            // {...register("image", {
-            //   required: isEditSession ? false : "This field is required",
-            // })}
-          />
-        </FormRow>
-       </div>
+       {!isEditSession && <div className="lg:col-span-2 mt-4">
+          <FormRow label="Product images">
+            <FileInput
+              id="image"
+              accept="image/*"
+              disabled={isWorking}
+              multiple
+              onChange={(e) => handleImages(e.target.files)}
+              // {...register("image", {
+              //   required: isEditSession ? false : "This field is required",
+              // })}
+            />
+          </FormRow>
+        </div>}
       </div>
 
       <FormRow>
@@ -191,7 +207,7 @@ function CreateCabinForm({ cabinToEdit = {}, onCloseModal }) {
           Cancel
         </Button>
         <Button disabled={isWorking}>
-          {isEditSession ? "Edit Cabin" : "Add Product"}
+          {isEditSession ? "Edit Product" : "Add Product"}
         </Button>
       </FormRow>
     </Form>

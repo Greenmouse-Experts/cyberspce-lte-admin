@@ -1,12 +1,13 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import toast from "react-hot-toast";
 import { deleteCabin as deleteCabinApi } from "../../services/apiCabins";
+import { deleteProduct } from "../../services/apis/product-api";
 
-export function useDeleteCabin() {
+export function useDeleteProduct() {
   const queryClient = useQueryClient();
 
-  const { isLoading: isDeleting, mutate: deleteCabin } = useMutation({
-    mutationFn: deleteCabinApi,
+  const { isLoading: isDeleting, mutate: deleteProd } = useMutation({
+    mutationFn: (id) => deleteProduct(id),
     onSuccess: () => {
       toast.success("Product successfully deleted");
       queryClient.invalidateQueries({
@@ -16,5 +17,5 @@ export function useDeleteCabin() {
     onError: (err) => toast.error(err.message),
   });
 
-  return { isDeleting, deleteCabin };
+  return { isDeleting, deleteProd };
 }
