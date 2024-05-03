@@ -34,9 +34,9 @@ export const adminLogin = async(payload) => {
   } 
 
 export const updateProfile = async(payload) => {
-    return  axios.post(`/auth/update-profile`, payload).then((response) => response.data)
+    return  axios.post(`/profile/update`, payload).then((response) => response.data)
  } 
 
  export const changePassword = async(payload) => {
-  return  axios.post(`/auth/update-password`, payload).then((response) => response.data)
+  return  axios.post(`/profile-update-password`, payload).then((response) => response.data)
 } 

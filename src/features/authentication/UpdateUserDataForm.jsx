@@ -1,49 +1,42 @@
 import { useState } from "react";
 
 import Button from "../../ui/Button";
-import FileInput from "../../ui/FileInput";
 import Form from "../../ui/Form";
 import FormRow from "../../ui/FormRow";
 import Input from "../../ui/Input";
-import { UpdateUser } from "./useUpdateUser";
 import useAuth from "../../hooks/useAuth";
+import { updateProfile } from "../../services/apis/auth-api";
+import toast from "react-hot-toast";
 
 function UpdateUserDataForm() {
-  // We don't need the loading state, and can immediately use the user data, because we know that it has already been loaded at this point
-  // const {
-  //   user: {
-  //     email,
-  //     user_metadata: { fullName: currentFullName },
-  //   },
-  // } = useUser();
-  const {user} = useAuth()
-
-  const { updateUser, isUpdating } = UpdateUser();
+  const {user, saveUser} = useAuth()
+  const [isUpdating, setIsUpdating] = useState(false)
 
   const [fullName, setFullName] = useState(`${user.firstName} ${user.lastName}`);
-  const [avatar, setAvatar] = useState(null);
+  // const [avatar, setAvatar] = useState(null);
 
-  function handleSubmit(e) {
-    e.preventDefault();
-    if (!fullName) return;
-    updateUser(
-      { fullName, avatar },
-      {
-        onSuccess: () => {
-          setAvatar(null);
-          e.target.reset();
-        },
-      }
-    );
+  const handeleUpdateProfile = async (e) => {
+    e.preventDefault()
+    setIsUpdating(true)
+    const payload = {
+      name: fullName
+    }
+    updateProfile(payload)
+    .then((res) => {
+        toast.success(res.message)
+        setIsUpdating(false)
+        saveUser({
+          ...user,
+          firstName: fullName.split(' ')[0],
+          lastName: fullName.split(' ')[1]
+        })
+    })
+    .catch(() => {
+      setIsUpdating(false)
+    })
   }
-
-  // function handleCancel(e) {
-  //   setFullName(currentFullName);
-  //   setAvatar(null);
-  // }
-
   return (
-    <Form onSubmit={handleSubmit}>
+    <Form onSubmit={handeleUpdateProfile}>
       <FormRow label="Email address">
         <Input value={user.email} disabled />
       </FormRow>
@@ -56,14 +49,14 @@ function UpdateUserDataForm() {
           disabled={isUpdating}
         />
       </FormRow>
-      <FormRow label="Avatar image">
+      {/* <FormRow label="Avatar image">
         <FileInput
           id="avatar"
           accept="image/*"
           onChange={(e) => setAvatar(e.target.files[0])}
           disabled={isUpdating}
         />
-      </FormRow>
+      </FormRow> */}
       <FormRow>
         {/* <Button
           onClick={handleCancel}
@@ -73,7 +66,7 @@ function UpdateUserDataForm() {
         >
           Cancel
         </Button> */}
-        <Button disabled={isUpdating}>Update account</Button>
+        <Button disabled={isUpdating}>{isUpdating? "Updating..." : 'Update account'}</Button>
       </FormRow>
     </Form>
   );

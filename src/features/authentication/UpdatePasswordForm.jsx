@@ -3,21 +3,52 @@ import Button from "../../ui/Button";
 import Form from "../../ui/Form";
 import FormRow from "../../ui/FormRow";
 import Input from "../../ui/Input";
-import { UpdateUser } from "./useUpdateUser";
+import toast from "react-hot-toast";
+import { changePassword } from "../../services/apis/auth-api";
+import { useState } from "react";
 
 function UpdatePasswordForm() {
   const { register, handleSubmit, formState, getValues, reset } = useForm();
   const { errors } = formState;
+  const [isUpdating, setIsUpdating] = useState(false)
+  // const { updateUser, isUpdating } = UpdateUser();
 
-  const { updateUser, isUpdating } = UpdateUser();
-
-  function onSubmit({ password }) {
-    console.log("called")
-    updateUser({ password }, { onSuccess: reset() });
+  // function onSubmit({ password }) {
+  //   console.log("called")
+  //   updateUser({ password }, { onSuccess: reset() });
+  // }
+  const handeleUpdatePassword = async (data) => {
+    setIsUpdating(true)
+    const payload = {
+      password: data.password,
+      password_confirmation: data.passwordConfirm
+    }
+    await changePassword(payload)
+    .then((res) => {
+        toast.success(res.message)
+        setIsUpdating(false)
+    })
+    .catch(() => {
+      setIsUpdating(false)
+    })
   }
 
   return (
-    <Form onSubmit={handleSubmit(onSubmit)}>
+    <Form onSubmit={handleSubmit(handeleUpdatePassword)}>
+      <FormRow
+        label="Old Password"
+        error={errors?.password?.message}
+      >
+        <Input
+          type="password"
+          id="password"
+          autoComplete="current-password"
+          disabled={isUpdating}
+          {...register("old_password", {
+            required: "This field is required",
+          })}
+        />
+      </FormRow>
       <FormRow
         label="New Password (min 8 chars)"
         error={errors?.password?.message}

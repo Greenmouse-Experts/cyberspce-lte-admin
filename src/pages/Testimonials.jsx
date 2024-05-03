@@ -14,7 +14,7 @@ const Testimonials = () => {
         <AddTestimonial />
       </Row>
       <Row>
-        <DealerTable />
+        {/* <DealerTable /> */}
       </Row>
     </div>
   )
