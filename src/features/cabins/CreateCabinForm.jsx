@@ -19,7 +19,7 @@ function CreateCabinForm({ cabinToEdit = {}, onCloseModal }) {
   const [specs, setSpecs] = useState(specification || "");
   const [images, setImages] = useState([]);
   const isEditSession = Boolean(editId);
-  const { register, handleSubmit, reset, getValues, formState } = useForm({
+  const { register, handleSubmit, reset, formState } = useForm({
     defaultValues: isEditSession ? editValues : {},
   });
 
@@ -58,6 +58,7 @@ function CreateCabinForm({ cabinToEdit = {}, onCloseModal }) {
         { payload: editPayload , id: editId},
         {
           onSuccess: (data) => {
+            console.log(data);
             reset();
             onCloseModal?.();
           },

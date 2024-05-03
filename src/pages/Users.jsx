@@ -1,5 +1,5 @@
 import UserTable from "../features/users/UserTable";
-import UserTableOperations from "../features/users/UserTableOperations";
+// import UserTableOperations from "../features/users/UserTableOperations";
 import Heading from "../ui/Heading";
 import Row from "../ui/Row";
 

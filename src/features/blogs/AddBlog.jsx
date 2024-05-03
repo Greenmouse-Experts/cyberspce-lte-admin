@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import Button from "../../ui/Button";
 import CreateBlogForm from "./CreateBlogForm";
-import BlogTable from "./BlogTable";
+// import BlogTable from "./BlogTable";
 import Modal from "../../ui/Modal";
 
 function AddBlog() {

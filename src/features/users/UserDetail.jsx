@@ -18,12 +18,6 @@ function UserDetail() {
   const moveBack = useMoveBack();
   
 
-  const statusToTagName = {
-    unconfirmed: "blue",
-    "checked-in": "green",
-    "checked-out": "silver",
-  };
-
   return (
     <>
       <Row type="horizontal">

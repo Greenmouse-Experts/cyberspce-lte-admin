@@ -1,14 +1,10 @@
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 import {
-  HiOutlineCalendarDays,
   HiOutlineCog6Tooth,
   HiOutlineHome,
-  HiOutlineHomeModern,
-  HiOutlineUsers,
 } from "react-icons/hi2";
-import { IoBagOutline } from "react-icons/io5";
-import { FaBook, FaCartPlus, FaHandshake, FaList, FaUsers } from "react-icons/fa";
+import { FaHandshake, FaList, FaUsers } from "react-icons/fa";
 import { FaBagShopping } from "react-icons/fa6";
 import { BiSolidShoppingBags } from "react-icons/bi";
 

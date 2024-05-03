@@ -5,18 +5,17 @@ import Menus from "../../ui/Menus";
 import Empty from "../../ui/Empty";
 import { getProducts } from "../../services/apis/product-api";
 import { useQuery } from "@tanstack/react-query";
-import { useSearchParams } from "react-router-dom";
+// import { useSearchParams } from "react-router-dom";
 
 function CabinTable() {
   const {
     isLoading,
     data: products,
-    error,
   } = useQuery({
     queryKey: ["products"],
     queryFn: getProducts,
   });
-  const [searchParams] = useSearchParams();
+  // const [searchParams] = useSearchParams();
 
   if (isLoading) return <Spinner />;
   if(!products?.data?.length) return <Empty resourceName="cabins"/>

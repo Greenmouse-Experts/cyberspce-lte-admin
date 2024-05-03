@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import Button from "../../ui/Button";
 import CreateCabinForm from "./CreateCabinForm";
-import CabinTable from "./CabinTable";
+// import CabinTable from "./CabinTable";
 import Modal from "../../ui/Modal";
 
 function AddCabin() {

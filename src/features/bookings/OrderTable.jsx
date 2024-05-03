@@ -8,7 +8,7 @@ import Pagination from "../../ui/Pagination";
 
 
 function OrderTable() {
-  const {orders, isLoading, count} = useOrders();
+  const {orders, isLoading} = useOrders();
 
   if(isLoading) return <Spinner/>
 

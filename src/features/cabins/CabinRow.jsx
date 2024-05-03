@@ -27,11 +27,6 @@ const Cabin = styled.div`
 
 const Price = styled.div``;
 
-const Discount = styled.div`
-  font-weight: 500;
-  color: var(--color-green-700);
-`;
-
 function CabinRow({ cabin }) {
   const { isDeleting, deleteProd } = useDeleteProduct();
 
@@ -39,7 +34,6 @@ function CabinRow({ cabin }) {
     id: cabinId,
     price,
     count_in_stock,
-    description,
     category,
     product_name,
     display,

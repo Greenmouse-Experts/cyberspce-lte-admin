@@ -1,19 +1,10 @@
 import styled from "styled-components";
-import { format, isToday } from "date-fns";
-import {
-  HiOutlineChatBubbleBottomCenterText,
-  HiOutlineCheckCircle,
-  HiOutlineCurrencyDollar,
-} from "react-icons/hi2";
-
-import DataItem from "../../ui/DataItem";
-import { Flag } from "../../ui/Flag";
+import { format } from "date-fns";
 import Select from "../../ui/Select";
 
-import { formatDistanceFromNow, formatCurrency } from "../../utils/helpers";
+import { formatCurrency } from "../../utils/helpers";
 import { FaMapMarkerAlt, FaTruck, FaUserCircle } from "react-icons/fa";
 import Table from "../../ui/Table";
-import BookingRow from "./BookingRow";
 import { useState } from "react";
 
 const StyledBookingDataBox = styled.section`
@@ -77,32 +68,6 @@ const Customer = styled.div`
   }
 `;
 
-const Price = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 1.6rem 3.2rem;
-  border-radius: var(--border-radius-sm);
-  margin-top: 2.4rem;
-
-  background-color: ${(props) =>
-    props.isPaid ? "var(--color-green-100)" : "var(--color-yellow-100)"};
-  color: ${(props) =>
-    props.isPaid ? "var(--color-green-700)" : "var(--color-yellow-700)"};
-
-  & p:last-child {
-    text-transform: uppercase;
-    font-size: 1.4rem;
-    font-weight: 600;
-  }
-
-  svg {
-    height: 2.4rem;
-    width: 2.4rem;
-    color: currentColor !important;
-  }
-`;
-
 const Footer = styled.footer`
   padding: 1.6rem 4rem;
   font-size: 2rem;
@@ -121,7 +86,6 @@ function BookingDataBox({ booking }) {
     created_at,
     startDate,
     guests: { fullName: guestName, email } = {},
-    cabins: { name: cabinName } = {},
   } = booking;
 
   const [selectedValue, setSelectedValue] = useState("");

@@ -2,7 +2,6 @@ import {
   HiOutlineBanknotes,
   HiOutlineBriefcase,
   HiOutlineCalendarDays,
-  HiOutlineChartBar,
 } from "react-icons/hi2";
 import Stat from "./Stat";
 import { formatCurrency } from "../../utils/helpers";
@@ -37,9 +36,9 @@ function Stats({ bookings, confirmedStays, numDays, cabinCount }) {
   const checkins = confirmedStays.length;
 
   // 4.
-  const occupation =
-    confirmedStays.reduce((acc, cur) => acc + cur.numNights, 0) /
-    (numDays * cabinCount);
+  // const occupation =
+  //   confirmedStays.reduce((acc, cur) => acc + cur.numNights, 0) /
+  //   (numDays * cabinCount);
   // num checked in nights / all available nights (num days * num cabins)
 
 

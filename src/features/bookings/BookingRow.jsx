@@ -1,21 +1,16 @@
 import styled from "styled-components";
-import { format, isToday } from "date-fns";
+import { format } from "date-fns";
 
 import Tag from "../../ui/Tag";
 import Table from "../../ui/Table";
 
 import { formatCurrency } from "../../utils/helpers";
-import { formatDistanceFromNow } from "../../utils/helpers";
 import Menus from "../../ui/Menus";
 import {
-  HiArrowDownOnSquare,
-  HiArrowUp,
-  HiArrowUpOnSquare,
   HiEye,
   HiTrash,
 } from "react-icons/hi2";
 import { useNavigate } from "react-router-dom";
-import { useCheckOut } from "../check-in-out/useCheckout";
 import Modal from "../../ui/Modal";
 import ConfirmDelete from "../../ui/ConfirmDelete";
 import { useDeleteBooking } from "./useDeleteBooking";
@@ -48,15 +43,11 @@ const Amount = styled.div`
 function BookingRow({
   booking: {
     id: bookingId,
-    created_at,
     startDate,
-    endDate,
-    numNights,
-    numGuests,
     totalPrice,
     status,
     guests: { fullName: guestName, email },
-    cabins: { name: cabinName },
+    // cabins: { name: cabinName },
   },
 }) {
   const statusToTagName = {
@@ -66,7 +57,7 @@ function BookingRow({
   };
 
   const navigate = useNavigate();
-  const { checkOut, isCheckingOut } = useCheckOut();
+  // const { checkOut, isCheckingOut } = useCheckOut();
   const { deleteBooking, isDeleting } = useDeleteBooking();
 
   return (
