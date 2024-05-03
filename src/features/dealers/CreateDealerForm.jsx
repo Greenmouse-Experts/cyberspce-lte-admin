@@ -99,7 +99,7 @@ function CreateDealerForm({ cabinToEdit = {}, onCloseModal }) {
 
       <FormRow label="Avalibilty Hour" error={errors?.regularPrice?.message}>
         <Input
-          type="number"
+          type="text"
           disabled={isWorking}
           id="avalibilty_hour"
           {...register("avalibilty_hour", {

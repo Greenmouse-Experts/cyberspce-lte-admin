@@ -7,6 +7,7 @@ import {
 import { FaHandshake, FaList, FaUsers } from "react-icons/fa";
 import { FaBagShopping } from "react-icons/fa6";
 import { BiSolidShoppingBags } from "react-icons/bi";
+import { MdOutlineReviews } from "react-icons/md";
 
 const NavList = styled.ul`
   display: flex;
@@ -97,6 +98,12 @@ function MainNav() {
           <StyledNavLink to="/dealers">
           <FaHandshake />
             <span>Data Plans</span>
+          </StyledNavLink>
+        </li>
+        <li>
+          <StyledNavLink to="/testimony">
+          <MdOutlineReviews/>
+            <span>Testimonials</span>
           </StyledNavLink>
         </li>
         {/* <li>

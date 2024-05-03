@@ -26,3 +26,15 @@ export const deleteProduct = async (id) => {
     .post(`/product/delete`, {id: id})
     .then((response) => response.data);
 };
+
+export const deleteProductImage = async (payload) => {
+  return axios
+    .post(`product-image/delete`, payload)
+    .then((response) => response.data);
+};
+
+export const addProductImage = async (payload) => {
+  return axios
+    .post(`/product-image/update`, payload)
+    .then((response) => response.data);
+};

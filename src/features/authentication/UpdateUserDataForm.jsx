@@ -5,22 +5,22 @@ import FileInput from "../../ui/FileInput";
 import Form from "../../ui/Form";
 import FormRow from "../../ui/FormRow";
 import Input from "../../ui/Input";
-
-import { useUser } from "./useUser";
 import { UpdateUser } from "./useUpdateUser";
+import useAuth from "../../hooks/useAuth";
 
 function UpdateUserDataForm() {
   // We don't need the loading state, and can immediately use the user data, because we know that it has already been loaded at this point
-  const {
-    user: {
-      email,
-      user_metadata: { fullName: currentFullName },
-    },
-  } = useUser();
+  // const {
+  //   user: {
+  //     email,
+  //     user_metadata: { fullName: currentFullName },
+  //   },
+  // } = useUser();
+  const {user} = useAuth()
 
   const { updateUser, isUpdating } = UpdateUser();
 
-  const [fullName, setFullName] = useState(currentFullName);
+  const [fullName, setFullName] = useState(`${user.firstName} ${user.lastName}`);
   const [avatar, setAvatar] = useState(null);
 
   function handleSubmit(e) {
@@ -37,15 +37,15 @@ function UpdateUserDataForm() {
     );
   }
 
-  function handleCancel(e) {
-    setFullName(currentFullName);
-    setAvatar(null);
-  }
+  // function handleCancel(e) {
+  //   setFullName(currentFullName);
+  //   setAvatar(null);
+  // }
 
   return (
     <Form onSubmit={handleSubmit}>
       <FormRow label="Email address">
-        <Input value={email} disabled />
+        <Input value={user.email} disabled />
       </FormRow>
       <FormRow label="Full name">
         <Input
@@ -65,14 +65,14 @@ function UpdateUserDataForm() {
         />
       </FormRow>
       <FormRow>
-        <Button
+        {/* <Button
           onClick={handleCancel}
           disabled={isUpdating}
           type="reset"
           variation="secondary"
         >
           Cancel
-        </Button>
+        </Button> */}
         <Button disabled={isUpdating}>Update account</Button>
       </FormRow>
     </Form>

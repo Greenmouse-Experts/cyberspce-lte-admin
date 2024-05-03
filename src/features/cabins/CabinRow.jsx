@@ -8,6 +8,8 @@ import Modal from "../../ui/Modal";
 import ConfirmDelete from "../../ui/ConfirmDelete";
 import Table from "../../ui/Table";
 import Menus from "../../ui/Menus";
+import { BiEdit } from "react-icons/bi";
+import UpdateCabinImages from "./UpdateCabinImages";
 
 const Img = styled.img`
   display: block;
@@ -81,7 +83,9 @@ function CabinRow({ cabin }) {
               <Modal.Open opens="edit">
                 <Menus.Button icon={<HiPencil />}>Edit</Menus.Button>
               </Modal.Open>
-
+              <Modal.Open opens="update">
+                <Menus.Button icon={<BiEdit />}>Update Images</Menus.Button>
+              </Modal.Open>
               <Modal.Open opens="delete">
                 <Menus.Button icon={<HiTrash />}>Delete</Menus.Button>
               </Modal.Open>
@@ -90,7 +94,9 @@ function CabinRow({ cabin }) {
             <Modal.Window name="edit">
               <CreateCabinForm cabinToEdit={cabin} />
             </Modal.Window>
-
+            <Modal.Window name="update">
+              <UpdateCabinImages images={JSON.parse(images)} id={cabinId} />
+            </Modal.Window>
             <Modal.Window name="delete">
               <ConfirmDelete
                 resourceName="cabins"

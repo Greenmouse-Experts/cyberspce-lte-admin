@@ -19,6 +19,7 @@ import { DarkModeProvider } from "./context/DarkModeContext";
 import Categorys from "./pages/Category";
 import Blogs from "./pages/Blogs";
 import Dealers from "./pages/Dealer";
+import Testimonials from "./pages/Testimonials";
 
 const queryClient = new QueryClient();
 
@@ -47,6 +48,7 @@ function App() {
               <Route path="account" element={<Account />} />
               <Route path="blogs" element={<Blogs />} />
               <Route path="dealers" element={<Dealers />} />
+              <Route path="testimony" element={<Testimonials />} />
               <Route path="settings" element={<Settings />} />
             </Route>
 

@@ -55,8 +55,8 @@ function DealerTable() {
           <div>Name</div>
           <div>Price</div>
           <div>Validity</div>
-          <div>Available Hour</div>
           <div>Available Day</div>
+          <div>Available Hour</div>
           <div>Created At</div>
           <div>Action</div>
         </Table.Header>

@@ -29,7 +29,7 @@ export const formatCurrency = (value) =>
       value
     ).replace('NGN', '₦');
 
-    const convertToBase64 = (file) => {
+ export const convertToBase64 = (file) => {
       return new Promise((resolve, reject) => {
         const reader = new FileReader();
         reader.readAsDataURL(file);
