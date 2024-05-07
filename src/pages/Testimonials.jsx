@@ -2,6 +2,7 @@ import React from 'react'
 import Row from "../ui/Row";
 import Heading from "../ui/Heading";
 import AddTestimonial from '../features/testimony/AddTestimony';
+import TestimonyTable from '../features/testimony/TestimonyTable';
 
 const Testimonials = () => {
   return (
@@ -12,7 +13,7 @@ const Testimonials = () => {
         <AddTestimonial />
       </Row>
       <Row>
-        {/* <DealerTable /> */}
+        <TestimonyTable />
       </Row>
     </div>
   )

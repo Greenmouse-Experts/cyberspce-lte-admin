@@ -1,7 +1,7 @@
 import React from "react";
 import Button from "../../ui/Button";
-// import CreateDealerForm from "./CreateDealerForm";
 import Modal from "../../ui/Modal";
+import CreateTestimonyForm from "./CreateTestimonyForm";
 
 function AddTestimonial() {
   return (
@@ -12,8 +12,7 @@ function AddTestimonial() {
         </Modal.Open>
 
         <Modal.Window name="testimony-form">
-          {/* <CreateTestimonialForm /> */}
-          <></>
+          <CreateTestimonyForm/>
         </Modal.Window>
       </Modal>
     </div>

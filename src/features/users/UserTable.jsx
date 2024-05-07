@@ -6,28 +6,31 @@ import { useBookings } from "./useUsers";
 import Spinner from "../../ui/Spinner"; 
 import Pagination from "../../ui/Pagination";
 import UserRow from "./UserRow";
+import { useUsers } from "./useUser";
 
 
 function UserTable() {
-  const {bookings, isLoading, count} = useBookings();
+  const {loading, users} = useUsers();
+  const count = users?.data?.length || 0
 
-  if(isLoading) return <Spinner/>
+  if(loading) return <Spinner/>
 
-  if(!bookings.length) return <Empty resourceName="bookings"/>
+  if(!users?.data?.length) return <Empty resourceName="customers"/>
 
   return (
     <Menus>
-      <Table columns="2fr 1.4fr 1fr 1.4fr 1fr 3.2rem">
+      <Table columns="1.2fr 2fr 1fr 0.8fr 1fr 0.6fr">
         <Table.Header>
           <div>Name</div>
           <div>Email</div>
           <div>Phone</div>
-          <div>Dates</div>
-          <div></div>
+          <div>Date Joined</div>
+          <div>Status</div>
+          <div>Action</div>
         </Table.Header>
 
         <Table.Body
-          data={bookings}
+          data={users?.data}
           render={(booking) => (
             <UserRow key={booking.id} booking={booking} />
           )}

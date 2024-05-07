@@ -64,12 +64,12 @@ function CabinRow({ cabin }) {
       <div>
         {display === "1" ? (
           <div className="flex items-center text-green-600 gap-x-1">
-            <span className="w-4 h-5 rounded-full bg-green-600"></span>
+            <span className="w-4 h-4 rounded-full bg-green-600"></span>
             <span>Active</span>
           </div>
         ) : (
           <div className="flex items-center text-orange-600 gap-x-1">
-            <span className="w-4 h-5 rounded-full bg-orange-600"></span>
+            <span className="w-4 h-4 rounded-full bg-orange-600"></span>
             <span>Inactive</span>
           </div>
         )}

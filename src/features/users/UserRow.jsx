@@ -1,17 +1,12 @@
 import styled from "styled-components";
 import { format } from "date-fns";
-
-import Tag from "../../ui/Tag";
 import Table from "../../ui/Table";
 import Menus from "../../ui/Menus";
-import {
-  HiEye,
-  HiTrash,
-} from "react-icons/hi2";
+import { HiEye, HiTrash } from "react-icons/hi2";
 import Modal from "../../ui/Modal";
-import ConfirmDelete from "../../ui/ConfirmDelete";
-import { useDeleteBooking } from "./useDeleteUser";
 import UserDetail from "./UserDetail";
+import { useEditUser } from "./useEditUser";
+import ConfirmDelete from "../../ui/ConfirmDelete";
 
 const Cabin = styled.div`
   font-size: 1.6rem;
@@ -19,64 +14,69 @@ const Cabin = styled.div`
   color: var(--color-grey-600);
 `;
 
-const Stacked = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 0.2rem;
-
-  & span:first-child {
-    font-weight: 500;
+function UserRow({ booking }) {
+  const { isLoading, updateUser } = useEditUser();
+  const  {
+    id: nameId,
+    created_at,
+    email,
+    name,
+    phone_number,
+    suspended
+  } = booking;
+  const handleUpdate = async () => {
+    const payload = {
+      suspend: suspended === '0'? 1 : 0,
+      customer_id: nameId,
+    }
+    updateUser(payload);
   }
-
-  & span:last-child {
-    color: var(--color-grey-500);
-    font-size: 1.2rem;
-  }
-`;
-
-
-function UserRow({
-  booking: {
-    id: bookingId,
-    startDate,
-    guests: { fullName: guestName, email },
-    cabins: { name: cabinName },
-  },
-}) {
-  const { deleteBooking, isDeleting } = useDeleteBooking();
 
   return (
     <Table.Row>
-      <Cabin>{guestName}</Cabin>
-
-      <Stacked>
-        <span>{email}</span>
-      </Stacked>
-
-      <Tag>09063744736</Tag>
-      <Stacked>
-        <span>{format(new Date(startDate), "MMM dd yyyy")}</span>
-      </Stacked>
-
+      <Cabin>{name}</Cabin>
+      <div>
+        <span className="break-words w-[200px] block">{email}</span>
+      </div>
+      <div>
+        {phone_number}
+      </div>
+      <div>
+        <span>{format(new Date(created_at), "MMM dd yyyy")}</span>
+      </div>
+      <div>
+        {suspended === "0" ? (
+          <div className="flex items-center text-green-600 gap-x-1">
+            <span className="w-4 h-4 rounded-full bg-green-600"></span>
+            <span>Active</span>
+          </div>
+        ) : (
+          <div className="flex items-center text-orange-600 gap-x-1">
+            <span className="w-4 h-4 rounded-full bg-orange-600"></span>
+            <span>Inactive</span>
+          </div>
+        )}
+      </div>
       <Modal>
         <Menus.Menu>
-          <Menus.Toggle id={bookingId} />
-          <Menus.List id={bookingId}>
+          <Menus.Toggle id={nameId} />
+          <Menus.List id={nameId}>
             <Modal.Open opens="user-detail">
               <Menus.Button icon={<HiEye />}>See details</Menus.Button>
             </Modal.Open>
             <Modal.Open opens="delete">
-              <Menus.Button icon={<HiTrash />}>Delete User</Menus.Button>
+              <Menus.Button icon={<HiTrash />}>Suspend User</Menus.Button>
             </Modal.Open>
           </Menus.List>
           <Modal.Window name="user-detail">
-            <UserDetail />
+            <UserDetail id={nameId}/>
           </Modal.Window>
           <Modal.Window name="delete">
             <ConfirmDelete
-              resourceName="user"
-              disabled={isDeleting}
-              onConfirm={() => deleteBooking(bookingId)}
+              resourceName={suspended === '0'? 'Suspend' : 'Unsuspend'}
+              fullMsg={`Are you sure you want to ${suspended === '0'? 'Suspend' : 'Unsuspend'} this user`}
+              disabled={isLoading}
+              onConfirm={() => handleUpdate()}
             />
           </Modal.Window>
         </Menus.Menu>

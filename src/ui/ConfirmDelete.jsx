@@ -20,14 +20,14 @@ const StyledConfirmDelete = styled.div`
   }
 `;
 
-function ConfirmDelete({ resourceName, onConfirm, disabled, onCloseModal }) {
+function ConfirmDelete({ resourceName, onConfirm, disabled, onCloseModal , fullMsg}) {
   return (
     <StyledConfirmDelete>
-      <Heading as="h3">Delete {resourceName}</Heading>
-      <p>
+      <Heading as="h3">{!fullMsg && 'Delete'} {resourceName}</Heading>
+      {fullMsg? <p>{fullMsg}</p> : <p>
         Are you sure you want to delete this {resourceName} permanently? This
         action cannot be undone.
-      </p>
+      </p>}
 
       <div>
         <Button
@@ -38,7 +38,7 @@ function ConfirmDelete({ resourceName, onConfirm, disabled, onCloseModal }) {
           Cancel
         </Button>
         <Button variation="danger" disabled={disabled} onClick={onConfirm}>
-          Delete
+          {fullMsg? resourceName : 'Delete'}
         </Button>
       </div>
     </StyledConfirmDelete>
