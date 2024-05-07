@@ -18,8 +18,10 @@ import ProtectedRoute from "./ui/ProtectedRoute";
 import { DarkModeProvider } from "./context/DarkModeContext";
 import Categorys from "./pages/Category";
 import Blogs from "./pages/Blogs";
-import Dealers from "./pages/Dealer";
+import Dealers from "./pages/Plan";
 import Testimonials from "./pages/Testimonials";
+import Plans from "./pages/Plan";
+import Dealer from "./pages/Dealer";
 
 const queryClient = new QueryClient();
 
@@ -47,7 +49,8 @@ function App() {
               <Route path="customers" element={<Users />} />
               <Route path="account" element={<Account />} />
               <Route path="blogs" element={<Blogs />} />
-              <Route path="dealers" element={<Dealers />} />
+              <Route path="plans" element={<Plans />} />
+              <Route path="dealers" element={<Dealer />} />
               <Route path="testimony" element={<Testimonials />} />
               <Route path="settings" element={<Settings />} />
             </Route>

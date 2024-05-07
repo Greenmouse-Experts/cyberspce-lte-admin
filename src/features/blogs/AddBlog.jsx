@@ -1,7 +1,6 @@
 import React from "react";
 import Button from "../../ui/Button";
 import CreateBlogForm from "./CreateBlogForm";
-// import BlogTable from "./BlogTable";
 import Modal from "../../ui/Modal";
 
 function AddBlog() {
@@ -27,23 +26,5 @@ function AddBlog() {
     </div>
   );
 }
-// function AddBlog() {
-//   const [isOpenModal, setIsOpenModal] = useState(false);
-//   return (
-//     <div>
-//       {" "}
-//       <Button onClick={() => setIsOpenModal((show) => !show)}>
-//         Add New Caibin
-//       </Button>
-//       {isOpenModal && (
-//         <Modal onClose={() => setIsOpenModal(false)}>
-//           <CreateCabinForm
-//           onCloseModal={() => setIsOpenModal(false)}
-//           />
-//         </Modal>
-//       )}
-//     </div>
-//   );
-// }
 
 export default AddBlog;

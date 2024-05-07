@@ -4,10 +4,10 @@ import Button from "../../ui/Button";
 import { useForm } from "react-hook-form";
 
 import FormRow from "../../ui/FormRow";
-import {  useCreatePlans } from "./useCreateDealer";
-import { useEditPlan } from "./useEditDealer";
+import {  useCreatePlans } from "./useCreatePlan";
+import { useEditPlan } from "./useEditPlan";
 
-function CreateDealerForm({ cabinToEdit = {}, onCloseModal }) {
+function CreatePlanForm({ cabinToEdit = {}, onCloseModal }) {
   const { id: editId, ...editValues } = cabinToEdit;
 
   const isEditSession = Boolean(editId);
@@ -29,6 +29,8 @@ function CreateDealerForm({ cabinToEdit = {}, onCloseModal }) {
       validity: data?.validity,
       avalibilty_hour: data?.avalibilty_hour,
       avalibilty_day: data?.avalibilty_day,
+      plan_type: data?.plan_type,
+      data_balance: data?.data_balance
     }
     if (isEditSession)
       editPlan(
@@ -60,6 +62,7 @@ function CreateDealerForm({ cabinToEdit = {}, onCloseModal }) {
       onSubmit={handleSubmit(onSubmit, onError)}
       type={onCloseModal ? "modal" : "regular"}
     >
+      <div className="grid lg:grid-cols-2">
       <FormRow label="Plan name" error={errors?.name?.message}>
         <Input
           type="text"
@@ -81,6 +84,16 @@ function CreateDealerForm({ cabinToEdit = {}, onCloseModal }) {
           })}
         />
       </FormRow>
+      <FormRow label="Data Allocated" error={errors?.maxCapacity?.message}>
+        <Input
+          type="text"
+          id="data_balance"
+          disabled={isWorking}
+          {...register("data_balance", {
+            required: "This field is required",
+          })}
+        />
+      </FormRow>
 
       <FormRow label="Validity" error={errors?.display?.message}>
           <select
@@ -96,7 +109,21 @@ function CreateDealerForm({ cabinToEdit = {}, onCloseModal }) {
             <option value="annually">Annually</option>
           </select>
         </FormRow>
-
+        <FormRow label="Plan Type" error={errors?.display?.message}>
+          <select
+            {...register("plan_type", {
+              required: "This field is required",
+            })}
+            name="plan_type"
+            className="border border-gray-300 rounded-lg w-[240px] py-3 p-2 "
+          >
+            <option value="">Select an option</option>
+            <option value="starter">Starter Plans</option>
+            <option value="monthly_renewal">Monthly Renewal Packages</option>
+            <option value="holiday">Holiday Packages</option>
+            <option value="extra_validity">Extra Validity Plans</option>
+          </select>
+        </FormRow>
       <FormRow label="Avalibilty Hour" error={errors?.regularPrice?.message}>
         <Input
           type="text"
@@ -125,6 +152,7 @@ function CreateDealerForm({ cabinToEdit = {}, onCloseModal }) {
           })}
         />
       </FormRow>
+      </div>
 
       <FormRow>
         {/* type is an HTML attribute! */}
@@ -143,4 +171,4 @@ function CreateDealerForm({ cabinToEdit = {}, onCloseModal }) {
   );
 }
 
-export default CreateDealerForm;
+export default CreatePlanForm;

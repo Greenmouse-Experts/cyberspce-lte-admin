@@ -75,7 +75,7 @@ const UpdateCabinImages = ({ images, id }) => {
             </div>
             <img
               src={item}
-              alt="product-image"
+              alt="product_image"
               className="w-[250px] h-[150px] object-cover"
             />
           </div>

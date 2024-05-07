@@ -1,15 +1,15 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import toast from "react-hot-toast";
-import { createPlanApi } from "../../services/apis/plans-api";
+import { createDealerApi } from "../../services/apis/dealer-api";
 
-export function useCreatePlans() {
+export function useCreateDealer() {
   const queryClient = useQueryClient();
 
-  const { mutate: createPlan, isLoading: isCreating } = useMutation({
-    mutationFn: (payload) => createPlanApi(payload),
+  const { mutate: createDealer, isLoading: isCreating } = useMutation({
+    mutationFn: (payload) => createDealerApi(payload),
     onSuccess: () => {
       toast.success("New Carbin successfully created");
-      queryClient.invalidateQueries({ queryKey: ["plans"] });
+      queryClient.invalidateQueries({ queryKey: ["dealers"] });
   
     },
     onError: (error) => {
@@ -17,5 +17,5 @@ export function useCreatePlans() {
     },
   });
 
-  return { isCreating, createPlan };
+  return { isCreating, createDealer };
 }

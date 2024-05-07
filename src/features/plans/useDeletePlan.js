@@ -1,20 +1,20 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import toast from "react-hot-toast";
-import { deleteDealerApi } from "../../services/apis/dealer-api";
+import { deletePlanApi } from "../../services/apis/plans-api";
 
-export function useDeleteDealer() {
+export function useDeletePlan() {
   const queryClient = useQueryClient();
 
-  const { isLoading: isDeleting, mutate: deleteDealer } = useMutation({
-    mutationFn: (id) => deleteDealerApi(id),
+  const { isLoading: isDeleting, mutate: deletePlan } = useMutation({
+    mutationFn: (id) => deletePlanApi(id),
     onSuccess: () => {
       toast.success("Plan successfully deleted");
       queryClient.invalidateQueries({
-        queryKey: ["dealers"],
+        queryKey: ["plans"],
       });
     },
     onError: (err) => toast.error(err.message),
   });
 
-  return { isDeleting, deleteDealer };
+  return { isDeleting, deletePlan };
 }

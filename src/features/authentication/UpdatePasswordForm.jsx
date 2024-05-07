@@ -20,8 +20,7 @@ function UpdatePasswordForm() {
   const handeleUpdatePassword = async (data) => {
     setIsUpdating(true)
     const payload = {
-      password: data.password,
-      password_confirmation: data.passwordConfirm
+      new_password: data.password,
     }
     await changePassword(payload)
     .then((res) => {
@@ -35,20 +34,6 @@ function UpdatePasswordForm() {
 
   return (
     <Form onSubmit={handleSubmit(handeleUpdatePassword)}>
-      <FormRow
-        label="Old Password"
-        error={errors?.password?.message}
-      >
-        <Input
-          type="password"
-          id="password"
-          autoComplete="current-password"
-          disabled={isUpdating}
-          {...register("old_password", {
-            required: "This field is required",
-          })}
-        />
-      </FormRow>
       <FormRow
         label="New Password (min 8 chars)"
         error={errors?.password?.message}

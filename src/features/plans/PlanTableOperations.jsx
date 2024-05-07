@@ -3,7 +3,7 @@ import TableOperations from "../../ui/TableOperations";
 import Filter from "../../ui/Filter";
 import SortBy from "../../ui/SortBy";
 
-function DealerTableOperations() {
+function PlanTableOperations() {
   return (
     <TableOperations>
       <Filter
@@ -28,4 +28,4 @@ function DealerTableOperations() {
   );
 }
 
-export default DealerTableOperations;
+export default PlanTableOperations;

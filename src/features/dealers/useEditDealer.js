@@ -1,20 +1,20 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import toast from "react-hot-toast";
-import { updatePlanApi } from "../../services/apis/plans-api";
+import { updateDealerApi } from "../../services/apis/dealer-api";
 
-export function useEditPlan() {
+export function useEditDealer() {
   const queryClient = useQueryClient();
 
-  const { mutate: editPlan, isLoading: isEditing } = useMutation({
-    mutationFn: ({ payload, id }) => updatePlanApi(id, payload),
+  const { mutate: editDealer, isLoading: isEditing } = useMutation({
+    mutationFn: ({ payload, id }) => updateDealerApi(id, payload),
     onSuccess: () => {
-      toast.success("New Plan successfully updated");
-      queryClient.invalidateQueries({ queryKey: ["plans"] });
+      toast.success("Dealer info successfully updated");
+      queryClient.invalidateQueries({ queryKey: ["dealers"] });
     },
     onError: (error) => {
       toast.error(error.message);
     },
   });
 
-  return { isEditing, editPlan };
+  return { isEditing, editDealer };
 }

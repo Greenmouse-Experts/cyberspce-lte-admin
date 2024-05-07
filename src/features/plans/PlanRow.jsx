@@ -1,8 +1,8 @@
 import styled from "styled-components";
 import { formatCurrency } from "../../utils/helpers";
 
-import CreateCabinForm from "./CreateDealersForm";
-import {  useDeleteDealer } from "./useDeleteDealer";
+import CreateCabinForm from "./CreatePlanForm";
+import {  useDeletePlan } from "./useDeletePlan";
 import { HiPencil, HiTrash } from "react-icons/hi2";
 import Modal from "../../ui/Modal";
 import ConfirmDelete from "../../ui/ConfirmDelete";
@@ -14,8 +14,8 @@ const Price = styled.div`
   font-weight: 500;
 `;
 
-function DealerRow({cabin}) {
-  const { isDeleting, deleteDealer } = useDeleteDealer();
+function PlanRow({cabin}) {
+  const { isDeleting, deletePlan } = useDeletePlan();
   const formatType = {
     "starter": "Starter Plans",
     "holiday": "Holiday Packages",
@@ -25,20 +25,24 @@ function DealerRow({cabin}) {
   const {
     id: cabinId,
     name,
-    address,
-    region,
-    phone1,
-    phone2,
-    created_at
+    price,
+    validity,
+    avalibilty_day,
+    avalibilty_hour,
+    created_at,
+    plan_type,
+    data_balance,
   } = cabin;
 
   return (
     <Table.Row>
       <div>{name}</div>
-      <div>{address}</div>
-      <div>{region}</div>
-      <div >{phone1}</div>
-      <div>{phone2}</div>
+      <Price>{formatCurrency(price)}</Price>
+      <div className="capitalize">{validity}</div>
+      <div>{formatType[plan_type]}</div>
+      <div >{data_balance}</div>
+      <div>{avalibilty_day}  days</div>
+      <div>{avalibilty_hour}</div>
       <div>{dayjs(created_at).format('DD/MM/YYYY')}</div>
       <div>
         <Modal>
@@ -63,7 +67,7 @@ function DealerRow({cabin}) {
               <ConfirmDelete
                 resourceName="plan"
                 disabled={isDeleting }
-                onConfirm={() => deleteDealer(cabinId)}
+                onConfirm={() => deletePlan(cabinId)}
               />
             </Modal.Window>
           </Menus.Menu>
@@ -73,4 +77,4 @@ function DealerRow({cabin}) {
   );
 }
 
-export default DealerRow;
+export default PlanRow;
