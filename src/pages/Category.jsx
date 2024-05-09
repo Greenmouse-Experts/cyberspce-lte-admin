@@ -7,7 +7,7 @@ function Categorys() {
   return (
     <>
       <Row type="horizontal">
-        <Heading as="h1">All Categorys</Heading>
+        <Heading as="h1">All Categories</Heading>
         <AddCategory />
       </Row>
       <Row>
