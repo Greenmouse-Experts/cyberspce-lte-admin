@@ -78,6 +78,7 @@ function CreatePlanForm({ cabinToEdit = {}, onCloseModal }) {
         <Input
           type="number"
           id="price"
+          step="0.01" 
           disabled={isWorking}
           {...register("price", {
             required: "This field is required",
