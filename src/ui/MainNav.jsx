@@ -107,12 +107,12 @@ function MainNav() {
             <span>Dealers</span>
           </StyledNavLink>
         </li>
-        <li>
+        {/* <li>
           <StyledNavLink to="/testimony">
           <MdOutlineReviews/>
             <span>Testimonials</span>
           </StyledNavLink>
-        </li>
+        </li> */}
         <li>
           <StyledNavLink to="/account">
             <HiOutlineCog6Tooth />

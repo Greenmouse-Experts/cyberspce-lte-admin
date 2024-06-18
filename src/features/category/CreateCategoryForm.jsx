@@ -35,7 +35,7 @@ function CreateCategoryForm({ cabinToEdit = {}, onCloseModal }) {
       );
     else
       createCat(
-        { ...data},
+      {name: data.name, display: 1 },
         {
           onSuccess: (data) => {
             reset();

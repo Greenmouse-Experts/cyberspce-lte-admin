@@ -12,7 +12,7 @@ function DealerTable() {
   // const [searchParams] = useSearchParams();
 
   if (isLoading) return <Spinner />;
-  if(!dealers?.data?.length) return <Empty resourceName="plans"/>
+  if(!dealers?.data?.length) return <Empty resourceName="dealer"/>
   //FILTER
   // const filterValue = searchParams.get("discount") || "all";
 

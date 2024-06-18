@@ -8,7 +8,7 @@ export function useCreateDealer() {
   const { mutate: createDealer, isLoading: isCreating } = useMutation({
     mutationFn: (payload) => createDealerApi(payload),
     onSuccess: () => {
-      toast.success("New Carbin successfully created");
+      toast.success("New Dealer successfully created");
       queryClient.invalidateQueries({ queryKey: ["dealers"] });
   
     },
