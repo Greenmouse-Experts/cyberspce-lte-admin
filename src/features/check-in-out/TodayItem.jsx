@@ -25,7 +25,7 @@ const Guest = styled.div`
 `;
 
 function TodayItem({ order }) {
-  const { status, items, user } = order;
+  const { status, items, user, id} = order;
   const totalAmount = items.reduce((sum, item) => {
     return sum + parseFloat(item.amount);
   }, 0);
@@ -42,13 +42,13 @@ function TodayItem({ order }) {
           size="small"
           variation="primary"
           as={Link}
-          // to={`/checkin/${id}`}
+          to={`/orders/${id}`}
         >
           Check in
         </Button>
       )}
       {status === "Confirmed" && <CheckoutButton 
-      // bookingId={id}
+      orderId={id}
        />}
     </StyledTodayItem>
   );

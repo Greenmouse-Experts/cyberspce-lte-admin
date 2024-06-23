@@ -40,11 +40,11 @@ const Amount = styled.div`
 function BookingRow({ order}) {
   const statusToTagName = {
     unconfirmed: "blue",
-    "checked-in": "green",
+    "Confirmed": "green",
     "checked-out": "silver",
   };
 
-  const  { user, items, id } = order
+  const  { user, items, id, status, paid_at } = order
   console.log(order);
 
   const totalAmount = items.reduce((sum, item) => {
@@ -63,10 +63,10 @@ function BookingRow({ order}) {
       <Cabin>{user.email}</Cabin>
 
       <Stacked>
-        <span>{format(new Date(), "MMM dd yyyy")}</span>
+        <span>{format(new Date(paid_at), "MMM dd yyyy")}</span>
       </Stacked>
 
-      <Tag type={statusToTagName[status]}>delivered</Tag>
+      <Tag type={statusToTagName[status]}>{status}</Tag>
 
       <Amount>{formatCurrency(totalAmount)}</Amount>
       <Modal>
