@@ -7,7 +7,7 @@ import { formatCurrency } from "../../utils/helpers";
 
 const StyledTodayItem = styled.li`
   display: grid;
-  grid-template-columns: 9rem 1fr 7rem 9rem;
+  grid-template-columns: repeat(4, 1fr);
   gap: 1.2rem;
   align-items: center;
 
@@ -24,26 +24,32 @@ const Guest = styled.div`
   font-weight: 500;
 `;
 
-function TodayItem({ activity }) {
-  const { id, status, guests } = activity;
+function TodayItem({ order }) {
+  const { status, items, user } = order;
+  const totalAmount = items.reduce((sum, item) => {
+    return sum + parseFloat(item.amount);
+  }, 0);
+  // console.log(order)
   return (
     <StyledTodayItem>
       {status === "unconfirmed" && <Tag type="green">Delivered</Tag>}
-      {status === "checked-in" && <Tag type="blue">Ongoing</Tag>}
-      {/* <Flag src={guests.countryFlag} alt={`flag of ${guests.country}`} /> */}
-      <Guest>{guests.fullName}</Guest>
-      <div>{formatCurrency(35)}</div>
+      {status === "Confirmed" && <Tag type="blue">Ongoing</Tag>}
+     
+      <Guest>{user.name}</Guest>
+      <div>{formatCurrency(totalAmount)}</div>
       {status === "unconfirmed" && (
         <Button
           size="small"
           variation="primary"
           as={Link}
-          to={`/checkin/${id}`}
+          // to={`/checkin/${id}`}
         >
           Check in
         </Button>
       )}
-      {status === "checked-in" && <CheckoutButton bookingId={id} />}
+      {status === "Confirmed" && <CheckoutButton 
+      // bookingId={id}
+       />}
     </StyledTodayItem>
   );
 }

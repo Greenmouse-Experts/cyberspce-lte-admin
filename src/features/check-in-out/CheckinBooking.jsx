@@ -8,7 +8,7 @@ import Button from "../../ui/Button";
 import ButtonText from "../../ui/ButtonText";
 
 import { useMoveBack } from "../../hooks/useMoveBack";
-import { useBooking } from "../bookings/useBooking";
+import { useOrder } from "../bookings/useOrder";
 import Spinner from "../../ui/Spinner";
 import { useEffect, useState } from "react";
 import Checkbox from "../../ui/Checkbox";
@@ -26,19 +26,19 @@ const Box = styled.div`
 `;
 
 function CheckinBooking() {
-  const { booking, isLoading } = useBooking();
+  const { order, isLoading } = useOrder();
   const { settings, isLoading: isLoadingSettings } = useSettings();
 
   const [confirmPaid, setConfirmPaid] = useState(false);
   const [addBreakfast, setAddBreakfast] = useState(false);
 
   useEffect(() => {
-    setConfirmPaid(booking?.isPaid ?? false);
-  }, [booking]);
+    setConfirmPaid(order?.isPaid ?? false);
+  }, [order]);
   const moveBack = useMoveBack();
   const { checkin, isCheckingIn } = useCheckIn();
   if (isLoading || isLoadingSettings) return <Spinner />;
-  if (!booking) return <Empty resourceName="booking" />;
+  if (!order) return <Empty resourceName="order" />;
   // console.log("id",booking.id);
   const {
     id: bookingId,
@@ -47,7 +47,7 @@ function CheckinBooking() {
     numGuests,
     hasBreakfast,
     numNights,
-  } = booking;
+  } = order;
 
   const optionalBreakfastPrice =
     settings.breakfastPrice * numNights * numGuests;
@@ -75,7 +75,7 @@ function CheckinBooking() {
         <ButtonText onClick={moveBack}>&larr; Back</ButtonText>
       </Row>
 
-      <BookingDataBox booking={booking} />
+      <BookingDataBox booking={order} />
       {!hasBreakfast && (
         <Box>
           <Checkbox

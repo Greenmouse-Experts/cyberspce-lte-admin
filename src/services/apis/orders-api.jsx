@@ -12,3 +12,7 @@ export const auditOrders = async (payload) => {
     .post(`/orders/audit`, payload)
     .then((response) => response.data);
 };
+
+export const getOrderById = async (id) => {
+  return axios.get(`/admin/orders/${id}`).then((response) => response.data);
+};

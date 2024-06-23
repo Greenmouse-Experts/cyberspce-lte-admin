@@ -2,6 +2,7 @@ import styled from "styled-components";
 import Heading from "../../ui/Heading";
 import {
   Cell,
+  Legend,
   Pie,
   PieChart,
   ResponsiveContainer,
@@ -167,14 +168,14 @@ function DurationChart({ confirmedStays }) {
             ))}
           </Pie>
           <Tooltip />
-          {/* <Legend
+          <Legend
             verticalAlign="middle"
             align="right"
             width="30%"
             layout="vertical"
             iconSize={15}
             iconType="circle"
-          /> */}
+          />
         </PieChart>
       </ResponsiveContainer>
     </ChartBox>

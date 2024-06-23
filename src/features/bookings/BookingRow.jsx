@@ -6,10 +6,7 @@ import Table from "../../ui/Table";
 
 import { formatCurrency } from "../../utils/helpers";
 import Menus from "../../ui/Menus";
-import {
-  HiEye,
-  HiTrash,
-} from "react-icons/hi2";
+import { HiEye, HiTrash } from "react-icons/hi2";
 import { useNavigate } from "react-router-dom";
 import Modal from "../../ui/Modal";
 import ConfirmDelete from "../../ui/ConfirmDelete";
@@ -40,48 +37,45 @@ const Amount = styled.div`
   font-weight: 500;
 `;
 
-function BookingRow({
-  booking: {
-    id: bookingId,
-    startDate,
-    totalPrice,
-    status,
-    guests: { fullName: guestName, email },
-    // cabins: { name: cabinName },
-  },
-}) {
+function BookingRow({ order}) {
   const statusToTagName = {
     unconfirmed: "blue",
     "checked-in": "green",
     "checked-out": "silver",
   };
 
+  const  { user, items, id } = order
+  console.log(order);
+
+  const totalAmount = items.reduce((sum, item) => {
+    return sum + parseFloat(item.amount);
+  }, 0);
+
   const navigate = useNavigate();
   // const { checkOut, isCheckingOut } = useCheckOut();
   const { deleteBooking, isDeleting } = useDeleteBooking();
 
+
   return (
     <Table.Row>
-      <Cabin>{guestName}</Cabin>
+      <Cabin>{user.name}</Cabin>
+
+      <Cabin>{user.email}</Cabin>
 
       <Stacked>
-        <span>{email}</span>
-      </Stacked>
-
-      <Stacked>
-        <span>{format(new Date(startDate), "MMM dd yyyy")}</span>
+        <span>{format(new Date(), "MMM dd yyyy")}</span>
       </Stacked>
 
       <Tag type={statusToTagName[status]}>delivered</Tag>
 
-      <Amount>{formatCurrency(totalPrice)}</Amount>
+      <Amount>{formatCurrency(totalAmount)}</Amount>
       <Modal>
         <Menus.Menu>
-          <Menus.Toggle id={bookingId} />
-          <Menus.List id={bookingId}>
+          <Menus.Toggle id={id} />
+          <Menus.List id={id}>
             <Menus.Button
               icon={<HiEye />}
-              onClick={() => navigate(`/orders/${bookingId}`)}
+              onClick={() => navigate(`/orders/${id}`)}
             >
               See details
             </Menus.Button>
@@ -93,7 +87,7 @@ function BookingRow({
             <ConfirmDelete
               resourceName="booking"
               disabled={isDeleting}
-              onConfirm={() => deleteBooking(bookingId)}
+              onConfirm={() => deleteBooking(id)}
             />
           </Modal.Window>
         </Menus.Menu>

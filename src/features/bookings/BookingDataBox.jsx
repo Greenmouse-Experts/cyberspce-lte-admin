@@ -81,12 +81,15 @@ const Footer = styled.footer`
 `;
 
 // A purely presentational component
-function BookingDataBox({ booking }) {
+function BookingDataBox({ order }) {
   const {
     created_at,
     startDate,
+    paid_at,
     guests: { fullName: guestName, email } = {},
-  } = booking;
+  } = order.data;
+
+  console.log(order)
 
   const [selectedValue, setSelectedValue] = useState("");
 
@@ -107,7 +110,7 @@ function BookingDataBox({ booking }) {
           </p>
         </div> */}
 
-        <p>{format(new Date(startDate), "EEE, MMM dd yyyy")}</p>
+        <p>{format(new Date(paid_at), "EEE, MMM dd yyyy")}</p>
 
         <Select
           style={{ color: "black", width: "30rem", height: "5rem" }}

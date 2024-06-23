@@ -40,15 +40,14 @@ function CreateCabinForm({ cabinToEdit = {}, onCloseModal }) {
       images: images,
       specification: specs,
       dealer_id: 0,
-      description: data?.coverage,
     };
     const editPayload = {
       category_id: data?.category_id,
       count_in_stock: data?.count_in_stock,
       coverage: data?.coverage,
       dealer_id: 0,
-      description: data?.coverage,
-      display: data?.display,
+      description: data?.description,
+      // display: data?.display,
       price: data?.price,
       product_name: data?.product_name,
       specification: specs,
@@ -156,7 +155,7 @@ function CreateCabinForm({ cabinToEdit = {}, onCloseModal }) {
           />
         </div>
 
-        <FormRow label="Publish" error={errors?.display?.message}>
+        {/* <FormRow label="Publish" error={errors?.display?.message}>
           <select
             {...register("display", {
               required: "This field is required",
@@ -168,9 +167,19 @@ function CreateCabinForm({ cabinToEdit = {}, onCloseModal }) {
             <option value="1">Active</option>
             <option value="0">Inactive</option>
           </select>
+        </FormRow> */}
+        <FormRow label="Description" error={errors?.description?.message}>
+          <Textarea
+            type="text"
+            id="description"
+            disabled={isWorking}
+            defaultValue=""
+            {...register("description", {
+              required: "This field is required",
+            })}
+          />
         </FormRow>
-
-        <FormRow label="Coverage" error={errors?.description?.message}>
+        <FormRow label="Coverage" error={errors?.coverage?.message}>
           <Textarea
             type="text"
             id="coverage"

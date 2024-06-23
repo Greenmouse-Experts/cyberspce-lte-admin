@@ -42,8 +42,8 @@ function App() {
               <Route index element={<Navigate replace to="dashboard" />} />
               <Route path="dashboard" element={<Dashboard />} />
               <Route path="orders" element={<Bookings />} />
-              <Route path="orders/:bookingId" element={<Booking />} />
-              <Route path="orders/:bookingId" element={<Checkin />} />
+              <Route path="orders/:orderId" element={<Booking />} />
+              <Route path="orders/:orderId" element={<Checkin />} />
               <Route path="products" element={<Cabins />} />
               <Route path="category" element={<Categorys />} />
               <Route path="customers" element={<Users />} />

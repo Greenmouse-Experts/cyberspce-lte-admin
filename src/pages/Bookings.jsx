@@ -8,7 +8,7 @@ function Bookings() {
     <>
       <Row type="horizontal">
         <Heading as="h1">All Orders</Heading>
-        <BookingTableOperations />
+        {/* <BookingTableOperations /> */}
       </Row>
       <OrderTable />
     </>

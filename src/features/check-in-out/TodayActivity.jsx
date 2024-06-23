@@ -40,18 +40,19 @@ const NoActivity = styled.p`
   margin-top: 0.8rem;
 `;
 
-function TodayActivity() {
+function TodayActivity({latestOrders}) {
   const { activities, isLoading } = useTodayActivity();
+  console.log(latestOrders)
   return (
     <StyledToday>
       <Row type="horizontal">
         <Heading as="h2">Latest Orders</Heading>
       </Row>
       {!isLoading ? (
-        activities?.length > 0 ? (
+        latestOrders?.length > 0 ? (
           <TodayList>
-            {activities.map((activity) => (
-              <TodayItem activity={activity} key={activity.id} />
+            {latestOrders.map((order) => (
+              <TodayItem order={order} key={order.id} />
             ))}
           </TodayList>
         ) : (

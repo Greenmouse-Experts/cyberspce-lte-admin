@@ -31,7 +31,7 @@ export function useOrders() {
     data: { data: orders, count } = {},
     error,
   } = useQuery({
-    queryKey: ["bookings", filter, sortBy, page],
+    queryKey: ["orders", filter, sortBy, page],
     queryFn: () => getOrders(),
   });
 
@@ -40,13 +40,13 @@ export function useOrders() {
 
   if (page < pageCount)
     queryClient.prefetchQuery({
-      queryKey: ["bookings", filter, sortBy, page + 1],
+      queryKey: ["orders", filter, sortBy, page + 1],
       queryFn: () => getBookings({ filter, sortBy, page: page + 1 }),
     });
 
   if (page > 1)
     queryClient.prefetchQuery({
-      queryKey: ["bookings", filter, sortBy, page - 1],
+      queryKey: ["orders", filter, sortBy, page - 1],
       queryFn: () => getBookings({ filter, sortBy, page: page - 1 }),
     });
 

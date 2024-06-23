@@ -1,12 +1,13 @@
 import styled from "styled-components";
-// import { useRecentBookings } from "./useRecentBookings";
-// import Spinner from "../../ui/Spinner";
-// import Stats from "./Stats";
-// import { useRecentStays } from "./useRecentStays";
-// import { useCabins } from "../cabins/useCabins";
-// import SalesChart from "./SalesChart";
-// import DurationChart from "./DurationChart";
-// import TodayActivity from "../check-in-out/TodayActivity";
+import { useRecentBookings } from "./useRecentBookings";
+import Spinner from "../../ui/Spinner";
+import Stats from "./Stats";
+import { useRecentStays } from "./useRecentStays";
+import { useCabins } from "../cabins/useCabins";
+import SalesChart from "./SalesChart";
+import DurationChart from "./DurationChart";
+import TodayActivity from "../check-in-out/TodayActivity";
+import { useStats } from "./useStats";
 
 const StyledDashboardLayout = styled.div`
   display: grid;
@@ -16,31 +17,47 @@ const StyledDashboardLayout = styled.div`
 `;
 
 function DashboardLayout() {
-  // const { isLoading, bookings } = useRecentBookings();
-  // const {
-  //   isLoading: isgettingStays,
-  //   stays,
-  //   confirmedStays,
-  //   numDays,
-  // } = useRecentStays();
+  const { isLoading, bookings } = useRecentBookings();
+  const {
+    isLoading: isgettingStays,
+    stays,
+    confirmedStays,
+    numDays,
+  } = useRecentStays();
+  const {isGettingStats, stats} = useStats()
 
-  // const { cabins, isLoading: isgettingCabins } = useCabins();
+  const { cabins, isLoading: isgettingCabins } = useCabins();
+  if (isLoading || isgettingStays || isGettingStats) return <Spinner />;
+  const {totalDealers,
+    totalProducts,
+    totalPlans,
+    totalPlanOrders,
+    totalProductOrders,
+    totalProductOrderItems,
+    monthlyProductPayments,
+    monthlyPlanPayments,
+    totalPlanSales, latestFiveProductOrders, totalProductSales} = stats
 
-  // if (isLoading || isgettingStays || isgettingCabins) return <Spinner />;
-  // console.log(confirmedStays, "dash");
+
+  console.log(stats)
+ 
+
   // const bookings = []
   return (
     <StyledDashboardLayout>
-      {/* <Stats
+      <Stats
         bookings={bookings}
         confirmedStays={confirmedStays}
         numDays={numDays}
-        cabinCount={cabins.length}
+        totalProducts={totalProducts}
+        totalProductSales={totalProductSales}
+        totalProductOrders={totalProductOrders}
+        totalPlans={totalPlans}
       />
-      <TodayActivity  />
+      <TodayActivity latestOrders={latestFiveProductOrders}  />
       <DurationChart confirmedStays={confirmedStays} />
 
-      <SalesChart numDays={numDays} bookings={bookings} /> */}
+      <SalesChart numDays={numDays} bookings={bookings} monthlyProductPayments={monthlyProductPayments} monthlyPlanPayments={monthlyPlanPayments}/>
     </StyledDashboardLayout>
   );
 }
