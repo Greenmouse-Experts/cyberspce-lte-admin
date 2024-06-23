@@ -36,6 +36,7 @@ function DashboardLayout() {
     totalProductOrderItems,
     monthlyProductPayments,
     monthlyPlanPayments,
+    latestFivePlanOrders,
     totalPlanSales, latestFiveProductOrders, totalProductSales} = stats
 
 
@@ -55,7 +56,8 @@ function DashboardLayout() {
         totalPlans={totalPlans}
       />
       <TodayActivity latestOrders={latestFiveProductOrders}  />
-      <DurationChart confirmedStays={confirmedStays} />
+      {/* <TodayActivity latestOrders={latestFiveProductOrders}  /> */}
+      <DurationChart confirmedStays={latestFivePlanOrders} />
 
       <SalesChart numDays={numDays} bookings={bookings} monthlyProductPayments={monthlyProductPayments} monthlyPlanPayments={monthlyPlanPayments}/>
     </StyledDashboardLayout>
@@ -63,3 +65,4 @@ function DashboardLayout() {
 }
 
 export default DashboardLayout;
+

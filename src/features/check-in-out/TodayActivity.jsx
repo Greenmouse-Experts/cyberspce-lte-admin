@@ -41,14 +41,14 @@ const NoActivity = styled.p`
 `;
 
 function TodayActivity({latestOrders}) {
-  const { activities, isLoading } = useTodayActivity();
+  // const { activities, isLoading } = useTodayActivity();
   console.log(latestOrders)
   return (
     <StyledToday>
       <Row type="horizontal">
         <Heading as="h2">Latest Orders</Heading>
       </Row>
-      {!isLoading ? (
+      {
         latestOrders?.length > 0 ? (
           <TodayList>
             {latestOrders.map((order) => (
@@ -58,9 +58,7 @@ function TodayActivity({latestOrders}) {
         ) : (
           <NoActivity>No activity today...</NoActivity>
         )
-      ) : (
-        <Spinner />
-      )}
+      }
     </StyledToday>
   );
 }
