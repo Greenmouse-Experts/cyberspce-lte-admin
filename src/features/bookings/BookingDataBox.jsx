@@ -88,9 +88,10 @@ function BookingDataBox({ order }) {
     paid_at,
     items,
     user: { name: customerName, email } = {},
+    delivery:{address, city, region} = {}
   } = order.data;
 
-  console.log(items)
+  console.log(order)
 
   const [selectedValue, setSelectedValue] = useState("");
 
@@ -147,7 +148,7 @@ function BookingDataBox({ order }) {
             <FaTruck size={40} />
             <div>
               <p>Order Info</p>
-              <p>Shipping: Nigeria</p>
+              <p>Shipping: {city}</p>
               <p>Payment method: CyberPay</p>
             </div>
           </Customer>
@@ -155,7 +156,7 @@ function BookingDataBox({ order }) {
             <FaMapMarkerAlt size={40} />
             <div>
               <p>Delivered To</p>
-              <p>123 road ogba, ikeja </p>
+              <p>{address}, {region} </p>
             </div>
           </Customer>
         </CustomerDetails>
