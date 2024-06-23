@@ -37,6 +37,7 @@ function DashboardLayout() {
     monthlyProductPayments,
     monthlyPlanPayments,
     latestFivePlanOrders,
+    
     totalPlanSales, latestFiveProductOrders, totalProductSales} = stats
 
 
@@ -54,6 +55,9 @@ function DashboardLayout() {
         totalProductSales={totalProductSales}
         totalProductOrders={totalProductOrders}
         totalPlans={totalPlans}
+        totalDealers={totalDealers}
+        totalPlanSales={totalPlanSales}
+
       />
       <TodayActivity latestOrders={latestFiveProductOrders}  />
       {/* <TodayActivity latestOrders={latestFiveProductOrders}  /> */}

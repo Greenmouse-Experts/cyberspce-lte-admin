@@ -78,7 +78,7 @@ function SalesChart({monthlyProductPayments, monthlyPlanPayments}) {
         Sales for the Year {monthlyProductPayments[0].year}
       </Heading>
 
-      <ResponsiveContainer height={300} width="100%">
+      <ResponsiveContainer height={300} width="100%" style={{padding: "10px"}}>
         <AreaChart data={mergedChartData}>
           <XAxis
             dataKey="label"
