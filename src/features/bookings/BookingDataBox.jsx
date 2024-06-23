@@ -90,7 +90,7 @@ function BookingDataBox({ order }) {
     user: { name: customerName, email } = {},
   } = order.data;
 
-  console.log(order)
+  console.log(items)
 
   const [selectedValue, setSelectedValue] = useState("");
 
@@ -161,20 +161,20 @@ function BookingDataBox({ order }) {
         </CustomerDetails>
         <Table columns="2fr 1.4fr 1fr 1.4fr 1fr 3.2rem">
           <Table.Header>
-            <div>Product</div>
-            <div>Unit</div>
+            <div>Product ID</div>
+            {/* <div>Unit</div> */}
             <div>Quantity</div>
             <div>Total</div>
           </Table.Header>
 
           <Table.Body
-            data={["jsj"]}
-            render={(booking) => (
+            data={items}
+            render={(item) => (
               <Table.Row>
-                <p>router</p>
-                <p>2</p>
-                <p>5</p>
-                <p>{formatCurrency(4500)}</p>
+                <p>{item.id}</p>
+                {/* <p>1</p> */}
+                <p>{item.quantity}</p>
+                <p>{formatCurrency(item.amount)}</p>
               </Table.Row>
             )}
           />
