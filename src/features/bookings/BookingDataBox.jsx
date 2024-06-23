@@ -86,7 +86,8 @@ function BookingDataBox({ order }) {
     created_at,
     startDate,
     paid_at,
-    guests: { fullName: guestName, email } = {},
+    items,
+    user: { name: customerName, email } = {},
   } = order.data;
 
   console.log(order)
@@ -99,6 +100,10 @@ function BookingDataBox({ order }) {
     setSelectedValue(newValue);
     // You can perform any other actions here based on the selected value
   };
+
+  const totalAmount = items.reduce((sum, item) => {
+    return sum + parseFloat(item.amount);
+  }, 0);
 
   return (
     <StyledBookingDataBox>
@@ -134,7 +139,7 @@ function BookingDataBox({ order }) {
           <Customer>
             <FaUserCircle size={40} />
             <div>
-              <p>{guestName}</p>
+              <p>{customerName}</p>
               <p>{email}</p>
             </div>
           </Customer>
@@ -143,7 +148,7 @@ function BookingDataBox({ order }) {
             <div>
               <p>Order Info</p>
               <p>Shipping: Nigeria</p>
-              <p>Payment method: Flutterwave</p>
+              <p>Payment method: CyberPay</p>
             </div>
           </Customer>
           <Customer>
@@ -204,14 +209,14 @@ function BookingDataBox({ order }) {
 
       <Footer>
         <p>
-          Sub Total: <span>{formatCurrency(3500)}</span>{" "}
+          Sub Total: <span>{formatCurrency(totalAmount)}</span>{" "}
         </p>
         <p>
           {" "}
-          Shipping Cost: <span>{formatCurrency(1500)}</span>
+          Shipping Cost: <span>{formatCurrency(0)}</span>
         </p>
         <p>
-          Grand Total: <span>{formatCurrency(4500)}</span>
+          Grand Total: <span>{formatCurrency(totalAmount)}</span>
         </p>
         <p>Sold {format(new Date(created_at), "EEE, MMM dd yyyy, p")}</p>
       </Footer>
