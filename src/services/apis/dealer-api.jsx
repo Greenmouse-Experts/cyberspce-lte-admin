@@ -13,6 +13,7 @@ export const createDealerApi = async (payload) => {
     .then((response) => response.data);
 };
 
+
 export const updateDealerApi = async (id, payload) => {
   const main ={...payload, id:id}
   return axios

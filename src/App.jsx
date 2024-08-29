@@ -22,6 +22,10 @@ import Dealers from "./pages/Plan";
 import Testimonials from "./pages/Testimonials";
 import Plans from "./pages/Plan";
 import Dealer from "./pages/Dealer";
+import Banner from "./pages/Banner";
+import Contact from "./pages/Contact";
+import Terms from "./pages/Terms";
+import Policy from "./pages/Policy";
 
 const queryClient = new QueryClient();
 
@@ -51,7 +55,10 @@ function App() {
               <Route path="blogs" element={<Blogs />} />
               <Route path="plans" element={<Plans />} />
               <Route path="dealers" element={<Dealer />} />
-              <Route path="testimony" element={<Testimonials />} />
+              <Route path="banner" element={<Banner />} />
+              <Route path="contact" element={<Contact />} />
+              <Route path="terms" element={<Terms />} />
+              <Route path="policy" element={<Policy />} />
               <Route path="settings" element={<Settings />} />
             </Route>
 

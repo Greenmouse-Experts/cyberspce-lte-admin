@@ -43,7 +43,7 @@ function LoginForm() {
         navigate('/')
       })
       .catch((err) => {
-        toast.error(err.response.data.message);
+        toast.error(err?.response?.data?.message);
         setLoading(false);
         if (!!err?.response?.data?.errors.length) {
           Object.entries(err?.response?.data?.errors).forEach(

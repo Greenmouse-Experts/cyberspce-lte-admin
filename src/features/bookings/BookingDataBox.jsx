@@ -6,6 +6,7 @@ import { formatCurrency } from "../../utils/helpers";
 import { FaMapMarkerAlt, FaTruck, FaUserCircle } from "react-icons/fa";
 import Table from "../../ui/Table";
 import { useState } from "react";
+import { useUpdateOrder } from "./useOrder";
 
 const StyledBookingDataBox = styled.section`
   /* Box */
@@ -83,6 +84,7 @@ const Footer = styled.footer`
 // A purely presentational component
 function BookingDataBox({ order }) {
   const {
+    id,
     created_at,
     startDate,
     paid_at,
@@ -91,7 +93,9 @@ function BookingDataBox({ order }) {
     delivery:{address, city, region} = {}
   } = order.data;
 
-  console.log(order)
+  const {updateOrderStatus, isUpdating} = useUpdateOrder()
+
+  // console.log(order)
 
   const [selectedValue, setSelectedValue] = useState("");
 
@@ -99,6 +103,14 @@ function BookingDataBox({ order }) {
   const handleSelectChange = (event) => {
     const newValue = event.target.value;
     setSelectedValue(newValue);
+    if(newValue){
+      updateOrderStatus({
+        order_id:id,
+        status:newValue,
+ 
+      })
+    }
+    console.log(newValue)
     // You can perform any other actions here based on the selected value
   };
 
@@ -127,8 +139,8 @@ function BookingDataBox({ order }) {
               value: "Change status",
               label: "Change status",
             },
-            { value: "Awaiting payment", label: "Awaiting payment" },
-            { value: "confirmed", label: "confirmed" },
+            { value: "Awaiting Payment", label: "Awaiting Payment" },
+            { value: "Confirmed", label: "Confirmed" },
             { value: "Shipped", label: "Shipped" },
             { value: "Delivered", label: "Delivered" },
           ]}
@@ -209,6 +221,7 @@ function BookingDataBox({ order }) {
       </Section>
 
       <Footer>
+        <p></p>
         <p>
           Sub Total: <span>{formatCurrency(totalAmount)}</span>{" "}
         </p>

@@ -1,6 +1,7 @@
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
-import { getOrderById } from "../../services/apis/orders-api";
+import { auditOrders, getOrderById } from "../../services/apis/orders-api";
+import toast from "react-hot-toast";
 
 export function useOrder() {
   const { orderId } = useParams();
@@ -17,3 +18,24 @@ export function useOrder() {
 
   return { isLoading, order, error };
 }
+
+
+export function useUpdateOrder() {
+  const queryClient = useQueryClient();
+  const { orderId } = useParams();
+
+  const { mutate: updateOrderStatus, isLoading: isUpdating } = useMutation({
+    mutationFn: (payload) => auditOrders(payload),
+    onSuccess: () => {
+      toast.success("Order status updated successfully");
+      queryClient.invalidateQueries({ queryKey: ["order", orderId] });
+  
+    },
+    onError: (error) => {
+      toast.error(error.message);
+    },
+  });
+
+  return { isUpdating, updateOrderStatus };
+}
+
