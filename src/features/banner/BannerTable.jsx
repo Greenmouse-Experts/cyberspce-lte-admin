@@ -1,6 +1,6 @@
 // import styled from "styled-components";
 import Spinner from "../../ui/Spinner";
-import { useDealer } from "./useBanner";
+import { useBanner } from "./useBanner";
 import Table from "../../ui/Table";
 import Menus from "../../ui/Menus";
 // import { useSearchParams } from "react-router-dom";
@@ -8,11 +8,11 @@ import Empty from "../../ui/Empty";
 import BannerRow from "./BannerRow";
 
 function BannerTable() {
-  const { isLoading, dealers } = useDealer();
+  const { isLoading, banner } = useBanner();
   // const [searchParams] = useSearchParams();
 
   if (isLoading) return <Spinner />;
-  if (!dealers?.data?.length) return <Empty resourceName="dealer" />;
+  if (!banner?.data?.length) return <Empty resourceName="banner" />;
   //FILTER
   // const filterValue = searchParams.get("discount") || "all";
 
@@ -51,7 +51,12 @@ function BannerTable() {
         />
       
       </Table> */}
-       <BannerRow banner={{}} key={""} />
+      {
+        banner?.data.map((banner) => (
+          <BannerRow banner={banner} key={banner.id} />
+        ))
+      }
+       {/* <BannerRow banner={banner} key={""} /> */}
     </Menus>
   );
 }

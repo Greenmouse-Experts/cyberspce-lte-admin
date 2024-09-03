@@ -130,6 +130,13 @@ function MainNav() {
           </StyledNavLink>
         </li>
         <li>
+          <StyledNavLink to="/about">
+            <MdOutlineReviews />
+            <span>About Us</span>
+          </StyledNavLink>
+        </li>
+        
+        <li>
           <StyledNavLink to="/account">
             <HiOutlineCog6Tooth />
             <span>Settings</span>

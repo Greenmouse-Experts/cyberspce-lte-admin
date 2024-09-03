@@ -7,9 +7,10 @@ import ContactForm from "../features/contact/ContactForm";
 import { useGetContact } from "../features/contact/useContact";
 import Spinner from "../ui/Spinner";
 import TermForm from "../features/terms/TermForm";
+import { useGetTerms } from "../features/terms/useTerm";
 
 function Terms() {
-  const { contact, isLoading } = useGetContact();
+  const { terms, isLoading } = useGetTerms();
   return (
     <>
       <Row type="horizontal">
@@ -19,7 +20,7 @@ function Terms() {
       <Row>
         {isLoading && <Spinner />}
 
-        {!isLoading && <TermForm initialData={[]} />}
+        {!isLoading && <TermForm initialData={terms} />}
       </Row>
     </>
   );

@@ -13,38 +13,41 @@ const BannerWrapper = styled.div``;
 
 const BannerContainer = styled.div`
   display: flex;
+  align-items:center;
+  gap: 2rem;
 `;
 
-const Image = styled.img``;
+const imageContainer = styled.div``;
+
+const Image = styled.img`
+  width: 150px;
+  height: 150px;
+`;
 
 function BannerRow({ banner }) {
+
   const { isDeleting, deleteDealer } = useDeleteDealer();
-  const formatType = {
-    starter: "Starter Plans",
-    holiday: "Holiday Packages",
-    monthly_renewal: "Monthly Renewal Packages",
-    extra_validity: "Extra Validity Plans",
-  };
-  // const {
-  //   id: cabinId,
-  //   name,
-  //   address,
-  //   region,
-  //   phone1,
-  //   phone2,
-  //   created_at,
-  // } = banner;
+console.log(banner)
+
+  const title = JSON.parse(banner.title);
 
   return (
     <BannerContainer>
-      <Image />
+      <imageContainer>
+        <p>Background</p>
+        <Image src={banner.background} />
+      </imageContainer>
+      <imageContainer>
+        <p>Image</p>
+        <Image src={banner.image} />
+      </imageContainer>
       <BannerWrapper>
-        <div>Double Your Online Presence</div>
+        <div>{title[0]["firstTitle"]}</div>
         <div>
           {" "}
-          <Heading as="h3">Bundled Data Offers</Heading>
+          <Heading as="h3">{title[0]["secondTitle"]}</Heading>
         </div>
-        <div>Double Your Online Presence</div>
+        <div>{title[0]["thirdTitle"]}</div>
         {/* <div>{region}</div>
   <div>{phone1}</div>
   <div>{phone2}</div> */}
@@ -65,7 +68,7 @@ function BannerRow({ banner }) {
             </Menus.List>
 
             <Modal.Window name="edit">
-              <CreateBannerForm cabinToEdit={[]} />
+              <CreateBannerForm bannerToEdit={banner} />
             </Modal.Window>
 
             <Modal.Window name="delete">

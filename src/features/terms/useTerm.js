@@ -1,27 +1,27 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { getContact, updateContact  } from "../../services/apis/general-api";
+import { getContact, getTerms, updateContact, updateTerms  } from "../../services/apis/general-api";
 import toast from "react-hot-toast";
 
-export function useGetContact() {
-  const { isLoading, data: contact } = useQuery({
-    queryKey: ["contact"],
-    queryFn: getContact,
+export function useGetTerms() {
+  const { isLoading, data: terms } = useQuery({
+    queryKey: ["terms"],
+    queryFn: getTerms,
   });
 
-  return { isLoading, contact };
+  return { isLoading, terms };
 }
 
-export function useUpdateContact() {
+export function useUpdateTerms() {
     const queryClient = useQueryClient()
-  const { isLoading: isUpdating, mutate: updateContactInfo } = useMutation({
-    mutationFn: updateContact,
+  const { isLoading: isUpdating, mutate: updateTermsInfo } = useMutation({
+    mutationFn: updateTerms,
     onSuccess: () => {
-      toast.success("Contact updated successfully");
+      toast.success("Policy updated successfully");
       queryClient.invalidateQueries({
-        queryKey: ["contact"],
+        queryKey: ["terms"],
       });
     },
   });
 
-  return { updateContactInfo, isUpdating };
+  return { updateTermsInfo, isUpdating };
 }

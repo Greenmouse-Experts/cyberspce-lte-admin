@@ -4,16 +4,17 @@ import Input from "../../ui/Input";
 import Textarea from "../../ui/Textarea";
 import FormRow from "../../ui/FormRow";
 import Button from "../../ui/Button";
-import { useUpdateTerms } from "./useTerm";
 
-function TermForm({ initialData, onSubmit }) {
+import { useUpdatePolicy } from "./usePolicy";
+
+function PolicyForm({ initialData, onSubmit }) {
   const { control, handleSubmit, formState, reset } = useForm({
     defaultValues: {
       content: initialData?.content ? JSON.parse(initialData?.content) : [{ title: "", description: "" }],
     },
   });
 
-  const { updateTermsInfo, isUpdating } = useUpdateTerms();
+  const { updatePolicyInfo, isUpdating } = useUpdatePolicy();
 
   const { errors } = formState;
 
@@ -27,12 +28,12 @@ function TermForm({ initialData, onSubmit }) {
     console.log(JSON.stringify(data));
 
     const content = { content: JSON.stringify(data.content) };
-    updateTermsInfo(content);
+    updatePolicyInfo(content);
   };
 
   return (
     <Form onSubmit={handleSubmit(handleFormSubmit)}>
-      <h2 className="mb-4 text-lg font-bold">Edit Terms</h2>
+      <h2 className="mb-4 text-lg font-bold">Edit Policy</h2>
 
       {fields.map((item, index) => (
         <div key={item.id} className="mb-6">
@@ -110,4 +111,4 @@ function TermForm({ initialData, onSubmit }) {
   );
 }
 
-export default TermForm;
+export default PolicyForm;

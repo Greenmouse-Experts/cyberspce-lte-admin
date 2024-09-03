@@ -1,7 +1,7 @@
 import React from "react";
 import Button from "../../ui/Button";
 import Modal from "../../ui/Modal";
-import CreateDealerForm from "./CreateBannerForm";
+import CreateBannerForm from "./CreateBannerForm";
 
 function AddBanner() {
   return (
@@ -12,7 +12,7 @@ function AddBanner() {
         </Modal.Open>
 
         <Modal.Window name="dealer-form">
-          <CreateDealerForm />
+          <CreateBannerForm />
         </Modal.Window>
       </Modal>
     </div>

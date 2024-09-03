@@ -26,6 +26,7 @@ import Banner from "./pages/Banner";
 import Contact from "./pages/Contact";
 import Terms from "./pages/Terms";
 import Policy from "./pages/Policy";
+import About from "./pages/About";
 
 const queryClient = new QueryClient();
 
@@ -59,6 +60,7 @@ function App() {
               <Route path="contact" element={<Contact />} />
               <Route path="terms" element={<Terms />} />
               <Route path="policy" element={<Policy />} />
+              <Route path="about" element={<About />} />
               <Route path="settings" element={<Settings />} />
             </Route>
 

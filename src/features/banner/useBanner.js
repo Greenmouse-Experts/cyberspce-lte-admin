@@ -1,16 +1,16 @@
 import { useQuery } from "@tanstack/react-query";
-import { getDealersApi } from "../../services/apis/dealer-api";
+import { getBannerApi } from "../../services/apis/banner-api";
 
-export function useDealer(){
+export function useBanner(){
     const {
         isLoading,
-        data:dealers,
+        data:banner,
         error,
       } = useQuery({
         queryKey: ["banner"],
-        queryFn: getDealersApi,
+        queryFn: getBannerApi,
       });
 
-      return {isLoading, dealers, error}
+      return {isLoading, banner, error}
       
 }

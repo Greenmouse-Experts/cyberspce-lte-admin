@@ -1,12 +1,13 @@
 import React from "react";
 import Heading from "../ui/Heading";
 import Row from "../ui/Row";
-import { useGetContact } from "../features/contact/useContact";
+
 import Spinner from "../ui/Spinner";
-import TermForm from "../features/terms/TermForm";
+import { useGetPolicy } from "../features/policy/usePolicy";
+import PolicyForm from "../features/policy/PolicyForm";
 
 function Policy() {
-  const { contact, isLoading } = useGetContact();
+  const { policy, isLoading } = useGetPolicy();
   return (
     <>
       <Row type="horizontal">
@@ -16,7 +17,7 @@ function Policy() {
       <Row>
         {isLoading && <Spinner />}
 
-        {!isLoading && <TermForm initialData={[]} />}
+        {!isLoading && <PolicyForm initialData={policy} />}
       </Row>
     </>
   );

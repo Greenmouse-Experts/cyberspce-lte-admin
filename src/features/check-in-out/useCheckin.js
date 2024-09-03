@@ -16,7 +16,7 @@ const navigate = useNavigate();
         ...breakfast,
       }),
     onSuccess: (data) => {
-      toast.success(`Booking #${data.id} successfully checked in`);
+      toast.success(`Order #${data.id} successfully checked in`);
       queryClient.invalidateQueries({ active: true });
       navigate('/dashboard');
     },

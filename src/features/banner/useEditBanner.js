@@ -5,7 +5,7 @@ import { updateBannerApi } from "../../services/apis/banner-api";
 export function useEditBanner() {
   const queryClient = useQueryClient();
 
-  const { mutate: editDealer, isLoading: isEditing } = useMutation({
+  const { mutate: editBanner, isLoading: isEditing } = useMutation({
     mutationFn: ({ payload, id }) => updateBannerApi(id, payload),
     onSuccess: () => {
       toast.success("Banner info successfully updated");
@@ -16,5 +16,5 @@ export function useEditBanner() {
     },
   });
 
-  return { isEditing, editDealer };
+  return { isEditing, editBanner };
 }

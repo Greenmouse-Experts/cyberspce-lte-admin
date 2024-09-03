@@ -7,74 +7,60 @@ import { useCreateBanner } from "./useCreateBanner";
 import { useEditBanner } from "./useEditBanner";
 import Textarea from "../../ui/Textarea";
 import FileInput from "../../ui/FileInput";
-import { convertToBase64 } from "../../utils/helpers";
+import { useEffect } from "react";
 
-function CreateBannerForm({ cabinToEdit = {}, onCloseModal }) {
-  const { id: editId, ...editValues } = cabinToEdit;
+function CreateBannerForm({ bannerToEdit = {}, onCloseModal }) {
+  const { id: editId, ...editValues } = bannerToEdit;
   const isEditSession = Boolean(editId);
 
+  console.log(bannerToEdit)
   const { register, handleSubmit, reset, formState, setValue } = useForm({
     defaultValues: isEditSession ? editValues : {},
   });
 
   const { errors } = formState;
   const { createBanner, isCreating } = useCreateBanner();
-  const { isEditing, editDealer } = useEditBanner();
+  const { isEditing, editBanner } = useEditBanner();
   const isWorking = isCreating || isEditing;
+
+  // Set existing data on edit
+  useEffect(() => {
+    if (isEditSession) {
+      // Parse the title if it's a JSON string
+      const parsedTitle = bannerToEdit.title ? JSON.parse(bannerToEdit.title) : [];
+      const { firstTitle = '', secondTitle = '', thirdTitle = '' } = parsedTitle[0] || {};
+
+      // Set form values
+      setValue("firstTitle", firstTitle);
+      setValue("secondTitle", secondTitle);
+      setValue("thirdTitle", thirdTitle);
+      setValue("background", bannerToEdit.background);
+      setValue("image", bannerToEdit.image);
+    }
+  }, [editValues, isEditSession, setValue, bannerToEdit]);
 
   const onSubmit = async (data) => {
     try {
-      // Convert images to base64
-      const imageBase64 = data.image[0]
-        ? await convertToBase64(data.image[0])
-        : null;
-      const backgroundBase64 = data.background[0]
-        ? await convertToBase64(data.background[0])
-        : null;
-
-      const payload = {
-        title: [
-          {
-            firstTitle: data.firstTitle,
-            secondTitle: data.secondTitle,
-            thirdTitle: data.thirdTitle,
-          },
-        ],
-        image: imageBase64, // Base64 string
-        background: backgroundBase64, // Base64 string
-      };
-    const title= 
+      const title = [
         {
           firstTitle: data.firstTitle,
           secondTitle: data.secondTitle,
           thirdTitle: data.thirdTitle,
         }
-      const formData = new FormData();
+      ];
 
-      // Append text fields
-      formData.append("title", title);
-      // Append files; ensure only the first file is added
+      const formData = new FormData();
+      formData.append("title", JSON.stringify(title));
       if (data.image?.[0]) formData.append("image", data.image[0]);
       if (data.background?.[0]) formData.append("background", data.background[0]);
 
-      if (isEditSession) {
-        editDealer(
-          { payload, id: editId },
-          {
-            onSuccess: () => {
-              reset();
-              onCloseModal?.();
-            },
-          }
-        );
-      } else {
-        createBanner(formData, {
-          onSuccess: () => {
-            reset();
-            onCloseModal?.();
-          },
-        });
-      }
+      const action = isEditSession ? editBanner : createBanner;
+      action(formData, {
+        onSuccess: () => {
+          reset();
+          onCloseModal?.();
+        },
+      });
     } catch (error) {
       console.error("Error converting files to base64:", error);
     }
@@ -124,8 +110,7 @@ function CreateBannerForm({ cabinToEdit = {}, onCloseModal }) {
               type="file"
               disabled={isWorking}
               {...register("image", {
-                required: "Image is required",
-                
+                required: !isEditSession ? "Image is required" : false,
               })}
             />
           </FormRow>
@@ -138,8 +123,7 @@ function CreateBannerForm({ cabinToEdit = {}, onCloseModal }) {
               type="file"
               disabled={isWorking}
               {...register("background", {
-                required: "Background is required",
-               
+                required: !isEditSession ? "Background is required" : false,
               })}
             />
           </FormRow>
@@ -150,7 +134,10 @@ function CreateBannerForm({ cabinToEdit = {}, onCloseModal }) {
         <Button
           variation="secondary"
           type="reset"
-          onClick={() => onCloseModal?.()}
+          onClick={() => {
+            reset();
+            onCloseModal?.();
+          }}
         >
           Cancel
         </Button>
