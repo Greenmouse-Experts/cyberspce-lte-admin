@@ -1,5 +1,6 @@
 {
-  "name": "the-wild-oasis",
+  "name": "lte-admin",
+  "homepage": "/lte-admin",
   "private": true,
   "version": "0.0.0",
   "type": "module",

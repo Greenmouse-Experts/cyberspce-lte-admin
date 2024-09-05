@@ -1,6 +1,6 @@
 import React from "react";
 import GlobalStyles from "./styles/GlobalStyles";
-import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
+import { BrowserRouter as Router, Navigate, Route, Routes } from "react-router-dom";
 import Dashboard from "./pages/Dashboard";
 import Bookings from "./pages/Bookings";
 import Cabins from "./pages/Cabins";
@@ -35,7 +35,7 @@ function App() {
     <DarkModeProvider>
       <QueryClientProvider client={queryClient}>
         <GlobalStyles />
-        <BrowserRouter>
+        <Router basename="/lte-admin">
           <Routes>
             <Route
               element={
@@ -67,7 +67,7 @@ function App() {
             <Route path="login" element={<Login />} />
             <Route path="*" element={<PageNotFound />} />
           </Routes>
-        </BrowserRouter>
+        </Router>
 
         <Toaster
           position="top-center"
