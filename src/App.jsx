@@ -27,6 +27,8 @@ import Contact from "./pages/Contact";
 import Terms from "./pages/Terms";
 import Policy from "./pages/Policy";
 import About from "./pages/About";
+import Service from "./pages/Service";
+import Breadcrumb from "./pages/Breadcrumb";
 
 const queryClient = new QueryClient();
 
@@ -56,11 +58,13 @@ function App() {
               <Route path="blogs" element={<Blogs />} />
               <Route path="plans" element={<Plans />} />
               <Route path="dealers" element={<Dealer />} />
+              <Route path="breadcrumb" element={<Breadcrumb />} />
               <Route path="banner" element={<Banner />} />
               <Route path="contact" element={<Contact />} />
               <Route path="terms" element={<Terms />} />
               <Route path="policy" element={<Policy />} />
               <Route path="about" element={<About />} />
+              <Route path="service" element={<Service />} />
               <Route path="settings" element={<Settings />} />
             </Route>
 

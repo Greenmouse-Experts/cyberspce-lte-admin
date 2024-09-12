@@ -1,9 +1,10 @@
 import { useForm, useFieldArray, Controller } from "react-hook-form";
 import Form from "../../ui/Form";
 import Input from "../../ui/Input";
-import Textarea from "../../ui/Textarea";
 import FormRow from "../../ui/FormRow";
 import Button from "../../ui/Button";
+import ReactQuill from "react-quill";
+import 'react-quill/dist/quill.snow.css'; // Import Quill styles
 
 import { useUpdatePolicy } from "./usePolicy";
 
@@ -24,7 +25,6 @@ function PolicyForm({ initialData, onSubmit }) {
   });
 
   const handleFormSubmit = (data) => {
-    // onSubmit(data);
     console.log(JSON.stringify(data));
 
     const content = { content: JSON.stringify(data.content) };
@@ -66,10 +66,11 @@ function PolicyForm({ initialData, onSubmit }) {
               control={control}
               name={`content.${index}.description`}
               render={({ field }) => (
-                <Textarea
+                <ReactQuill
+                  value={field.value}
+                  onChange={(value) => field.onChange(value)}
                   placeholder={`Description ${index + 1}`}
-                  {...field}
-                  error={errors?.content?.[index]?.description?.message}
+                  modules={{ toolbar: true }} // Customize toolbar if needed
                 />
               )}
               rules={{ required: "Description is required" }}
@@ -98,7 +99,7 @@ function PolicyForm({ initialData, onSubmit }) {
 
       {/* Form Action Buttons */}
       <FormRow>
-        <Button type="submit">Save Changes</Button>
+        <Button type="submit" disabled={isUpdating}>Save Changes</Button>
         <Button
           type="reset"
           variation="secondary"

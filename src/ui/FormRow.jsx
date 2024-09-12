@@ -3,7 +3,8 @@ import styled from "styled-components";
 
 const StyledFormRow = styled.div`
   display: flex;
-  align-items: center;
+
+  flex-direction: column;
   grid-template-rows: 24rem 1fr 1.2fr;
   gap: 2.4rem;
 

@@ -111,6 +111,12 @@ function MainNav() {
           </StyledNavLink>
         </li>
         <li>
+          <StyledNavLink to="/breadcrumb">
+            <FaHandshake />
+            <span>Breadcrumb</span>
+          </StyledNavLink>
+        </li>
+        <li>
           <StyledNavLink to="/contact">
             <MdOutlineReviews />
             <span>Contact</span>
@@ -133,6 +139,12 @@ function MainNav() {
           <StyledNavLink to="/about">
             <MdOutlineReviews />
             <span>About Us</span>
+          </StyledNavLink>
+        </li>
+        <li>
+          <StyledNavLink to="/service">
+            <MdOutlineReviews />
+            <span>Service</span>
           </StyledNavLink>
         </li>
         
