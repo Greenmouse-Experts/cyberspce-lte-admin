@@ -9,12 +9,17 @@ export const createBreadCrumbApi = async (payload) => {
     .then((response) => response.data);
 };
 
-export const updateBreadCrumbApi = async (id, payload) => {
-  const main = { ...payload, id: id };
+export const updateBreadCrumbApi = async (payload) => {
+ 
   return axios
-    .post(`/admin/breadcrumb/update`, main)
+    .post(`/admin/breadcrumb/update`, payload)
     .then((response) => response.data);
 };
 export const getBreadCrumbApi = async () => {
   return axios.get(`/admin/breadcrumbs`).then((response) => response.data);
 };
+
+export const deleteBreadCrumbApi = async (id) => {
+  return axios.post(`/admin/breadcrumb/delete?breadcrumb_id=${id}`).then((response) => response.data);
+};
+

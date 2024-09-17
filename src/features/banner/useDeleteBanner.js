@@ -1,12 +1,15 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import toast from "react-hot-toast";
-import { deleteDealerApi } from "../../services/apis/dealer-api";
+import { deleteBannerApi } from "../../services/apis/banner-api";
 
-export function useDeleteDealer() {
+export function useDeleteBanner() {
   const queryClient = useQueryClient();
 
-  const { isLoading: isDeleting, mutate: deleteDealer } = useMutation({
-    mutationFn: (id) => deleteDealerApi(id),
+  const { isLoading: isDeleting, mutate: deleteBanner } = useMutation({
+    mutationFn: (id) => {
+      console.log(id)
+      deleteBannerApi(id)
+    },
     onSuccess: () => {
       toast.success("Banner successfully deleted");
       queryClient.invalidateQueries({
@@ -16,5 +19,5 @@ export function useDeleteDealer() {
     onError: (err) => toast.error(err.message),
   });
 
-  return { isDeleting, deleteDealer };
+  return { isDeleting, deleteBanner };
 }

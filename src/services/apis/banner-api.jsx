@@ -9,12 +9,18 @@ export const createBannerApi = async (payload) => {
     .then((response) => response.data);
 };
 
-export const updateBannerApi = async (id, payload) => {
-  const main = { ...payload, id: id };
+export const updateBannerApi = async ( payload) => {
+  
+  console.log( payload)
   return axios
-    .post(`/admin/banner/update`, main)
+    .post(`/admin/banner/update`, payload)
     .then((response) => response.data);
 };
 export const getBannerApi = async () => {
   return axios.get(`/admin/banners`).then((response) => response.data);
+};
+
+export const deleteBannerApi = async (id) => {
+  console.log(id)
+  return axios.post(`/admin/banner/delete?banner_id=${id}`).then((response) => response.data);
 };

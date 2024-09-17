@@ -6,7 +6,7 @@ export function useEditBreadcrumb() {
   const queryClient = useQueryClient();
 
   const { mutate: editBanner, isLoading: isEditing } = useMutation({
-    mutationFn: ({ payload, id }) => updateBreadCrumbApi(id, payload),
+    mutationFn: (payload) => updateBreadCrumbApi( payload),
     onSuccess: () => {
       toast.success("Breadcrumb info successfully updated");
       queryClient.invalidateQueries({ queryKey: ["breadcrumb"] });

@@ -1,12 +1,12 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import toast from "react-hot-toast";
-import { deleteDealerApi } from "../../services/apis/dealer-api";
+import { deleteBreadCrumbApi } from "../../services/apis/breadcrumb-api";
 
 export function useDeleteBreadcrumb() {
   const queryClient = useQueryClient();
 
-  const { isLoading: isDeleting, mutate: deleteDealer } = useMutation({
-    mutationFn: (id) => deleteDealerApi(id),
+  const { isLoading: isDeleting, mutate: deleteBreadcrumb } = useMutation({
+    mutationFn: (id) => deleteBreadCrumbApi(id),
     onSuccess: () => {
       toast.success("Breadcrumb successfully deleted");
       queryClient.invalidateQueries({
@@ -16,5 +16,5 @@ export function useDeleteBreadcrumb() {
     onError: (err) => toast.error(err.message),
   });
 
-  return { isDeleting, deleteDealer };
+  return { isDeleting, deleteBreadcrumb };
 }

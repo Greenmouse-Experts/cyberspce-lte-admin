@@ -1,11 +1,9 @@
 import styled from "styled-components";
-import { useDeleteDealer } from "./useDeleteBanner";
+import { useDeleteBanner } from "./useDeleteBanner";
 import { HiPencil, HiTrash } from "react-icons/hi2";
 import Modal from "../../ui/Modal";
 import ConfirmDelete from "../../ui/ConfirmDelete";
-import Table from "../../ui/Table";
 import Menus from "../../ui/Menus";
-import dayjs from "dayjs";
 import CreateBannerForm from "./CreateBannerForm";
 import Heading from "../../ui/Heading";
 
@@ -13,21 +11,17 @@ const BannerWrapper = styled.div``;
 
 const BannerContainer = styled.div`
   display: flex;
-  align-items:center;
+  align-items: center;
   gap: 2rem;
 `;
 
-const imageContainer = styled.div``;
-
 const Image = styled.img`
-  width: 150px;
+  width: 250px;
   height: 150px;
 `;
 
 function BannerRow({ banner }) {
-
-  const { isDeleting, deleteDealer } = useDeleteDealer();
-console.log(banner)
+  const { isDeleting, deleteBanner } = useDeleteBanner();
 
   const title = JSON.parse(banner.title);
 
@@ -48,16 +42,13 @@ console.log(banner)
           <Heading as="h3">{title[0]["secondTitle"]}</Heading>
         </div>
         <div>{title[0]["thirdTitle"]}</div>
-        {/* <div>{region}</div>
-  <div>{phone1}</div>
-  <div>{phone2}</div> */}
       </BannerWrapper>
-      <div>
+      <div style={{ marginLeft: "auto" }}>
         <Modal>
           <Menus.Menu>
-            <Menus.Toggle id={1} />
+            <Menus.Toggle id={banner.id} />
 
-            <Menus.List id={1}>
+            <Menus.List id={banner.id}>
               <Modal.Open opens="edit">
                 <Menus.Button icon={<HiPencil />}>Edit</Menus.Button>
               </Modal.Open>
@@ -75,7 +66,7 @@ console.log(banner)
               <ConfirmDelete
                 resourceName="Banner"
                 disabled={isDeleting}
-                onConfirm={() => deleteDealer("")}
+                onConfirm={() => deleteBanner(banner.id)}
               />
             </Modal.Window>
           </Menus.Menu>

@@ -7,6 +7,7 @@ import Menus from "../../ui/Menus";
 import dayjs from "dayjs";
 import CreateBreadcrumbForm from "./CreateBreadcrumbForm";
 import Heading from "../../ui/Heading";
+import { useDeleteBreadcrumb } from "./useDeleteBreadcrumb";
 
 const BannerWrapper = styled.div``;
 
@@ -19,14 +20,14 @@ const BannerContainer = styled.div`
 const imageContainer = styled.div``;
 
 const Image = styled.img`
-  width: 150px;
-  height: 150px;
+  width: 300px;
+  height: 200px;
 `;
 
 function BreadcrumbRow({ breadcrumb }) {
 
-  // const { isDeleting, deleteDealer } = useDeleteDealer();
-console.log(breadcrumb)
+   const { isDeleting, deleteBreadcrumb  } = useDeleteBreadcrumb();
+
 
 
   return (
@@ -38,21 +39,15 @@ console.log(breadcrumb)
      
       <BannerWrapper>
         <div>{breadcrumb["title"]}</div>
-        {/* <div>
-          {" "}
-          <Heading as="h3">{title[0]["secondTitle"]}</Heading>
-        </div>
-        <div>{title[0]["thirdTitle"]}</div> */}
-        {/* <div>{region}</div>
-  <div>{phone1}</div>
-  <div>{phone2}</div> */}
+        <div>{breadcrumb["subtitle"]}</div>
       </BannerWrapper>
-      <div>
+     
+      <div style={{marginLeft:'auto'}}>
         <Modal>
           <Menus.Menu>
-            <Menus.Toggle id={1} />
+            <Menus.Toggle id={breadcrumb.id} />
 
-            <Menus.List id={1}>
+            <Menus.List id={breadcrumb.id}>
               <Modal.Open opens="edit">
                 <Menus.Button icon={<HiPencil />}>Edit</Menus.Button>
               </Modal.Open>
@@ -70,7 +65,7 @@ console.log(breadcrumb)
               <ConfirmDelete
                 resourceName="Breadcrumb"
                 disabled={isDeleting}
-                onConfirm={() => deleteDealer("")}
+                onConfirm={() => deleteBreadcrumb(breadcrumb.id)}
               />
             </Modal.Window>
           </Menus.Menu>

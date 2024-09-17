@@ -13,7 +13,7 @@ function CreateBannerForm({ bannerToEdit = {}, onCloseModal }) {
   const { id: editId, ...editValues } = bannerToEdit;
   const isEditSession = Boolean(editId);
 
-  console.log(bannerToEdit)
+  console.log(bannerToEdit);
   const { register, handleSubmit, reset, formState, setValue } = useForm({
     defaultValues: isEditSession ? editValues : {},
   });
@@ -25,19 +25,31 @@ function CreateBannerForm({ bannerToEdit = {}, onCloseModal }) {
 
   // Set existing data on edit
   useEffect(() => {
-    if (isEditSession) {
-      // Parse the title if it's a JSON string
-      const parsedTitle = bannerToEdit.title ? JSON.parse(bannerToEdit.title) : [];
-      const { firstTitle = '', secondTitle = '', thirdTitle = '' } = parsedTitle[0] || {};
-
-      // Set form values
-      setValue("firstTitle", firstTitle);
-      setValue("secondTitle", secondTitle);
-      setValue("thirdTitle", thirdTitle);
-      setValue("background", bannerToEdit.background);
-      setValue("image", bannerToEdit.image);
+    if (isEditSession && bannerToEdit) {
+      try {
+        // Parse the title if it's a JSON string
+        const parsedTitle = bannerToEdit.title
+          ? JSON.parse(bannerToEdit.title)
+          : [];
+  
+        const {
+          firstTitle = "",
+          secondTitle = "",
+          thirdTitle = "",
+        } = parsedTitle[0] || {};
+  
+        // Set form values
+        setValue("firstTitle", firstTitle);
+        setValue("secondTitle", secondTitle);
+        setValue("thirdTitle", thirdTitle);
+        setValue("background", bannerToEdit.background || "");
+        setValue("image", bannerToEdit.image || "");
+      } catch (error) {
+        console.error("Error parsing title:", error);
+      }
     }
-  }, [editValues, isEditSession, setValue, bannerToEdit]);
+  }, [isEditSession, bannerToEdit, setValue]);
+  
 
   const onSubmit = async (data) => {
     try {
@@ -46,13 +58,18 @@ function CreateBannerForm({ bannerToEdit = {}, onCloseModal }) {
           firstTitle: data.firstTitle,
           secondTitle: data.secondTitle,
           thirdTitle: data.thirdTitle,
-        }
+        },
       ];
 
       const formData = new FormData();
       formData.append("title", JSON.stringify(title));
       if (data.image?.[0]) formData.append("image", data.image[0]);
-      if (data.background?.[0]) formData.append("background", data.background[0]);
+      if (data.background?.[0])
+        formData.append("background", data.background[0]);
+      if(isEditSession){
+        formData.append("banner_id", editId);
+      }
+      console.log("formData", formData);
 
       const action = isEditSession ? editBanner : createBanner;
       action(formData, {

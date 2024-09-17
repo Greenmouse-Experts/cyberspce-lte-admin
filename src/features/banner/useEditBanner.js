@@ -6,7 +6,7 @@ export function useEditBanner() {
   const queryClient = useQueryClient();
 
   const { mutate: editBanner, isLoading: isEditing } = useMutation({
-    mutationFn: ({ payload, id }) => updateBannerApi(id, payload),
+    mutationFn: (payload) => updateBannerApi(payload),
     onSuccess: () => {
       toast.success("Banner info successfully updated");
       queryClient.invalidateQueries({ queryKey: ["banner"] });
