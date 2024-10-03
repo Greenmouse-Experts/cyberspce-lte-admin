@@ -122,7 +122,13 @@ function MainNav() {
             <span>Contact</span>
           </StyledNavLink>
           </li>
-        <p>Pages</p>
+          <li>
+          <StyledNavLink to="/account">
+            <HiOutlineCog6Tooth />
+            <span>Settings</span>
+          </StyledNavLink>
+        </li>
+        <p className="ml-12 mt-5">Pages</p>
         <li>
           <StyledNavLink to="/terms">
             <MdOutlineReviews />
@@ -148,12 +154,7 @@ function MainNav() {
           </StyledNavLink>
         </li>
         
-        <li>
-          <StyledNavLink to="/account">
-            <HiOutlineCog6Tooth />
-            <span>Settings</span>
-          </StyledNavLink>
-        </li>
+       
       </NavList>
     </nav>
   );

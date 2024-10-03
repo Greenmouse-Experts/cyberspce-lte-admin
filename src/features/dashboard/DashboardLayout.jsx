@@ -1,9 +1,6 @@
 import styled from "styled-components";
-import { useRecentBookings } from "./useRecentBookings";
 import Spinner from "../../ui/Spinner";
 import Stats from "./Stats";
-import { useRecentStays } from "./useRecentStays";
-import { useCabins } from "../cabins/useCabins";
 import SalesChart from "./SalesChart";
 import DurationChart from "./DurationChart";
 import TodayActivity from "../check-in-out/TodayActivity";
@@ -17,17 +14,11 @@ const StyledDashboardLayout = styled.div`
 `;
 
 function DashboardLayout() {
-  const { isLoading, bookings } = useRecentBookings();
-  const {
-    isLoading: isgettingStays,
-    stays,
-    confirmedStays,
-    numDays,
-  } = useRecentStays();
+
+ 
   const {isGettingStats, stats} = useStats()
 
-  const { cabins, isLoading: isgettingCabins } = useCabins();
-  if (isLoading || isgettingStays || isGettingStats) return <Spinner />;
+  if (  isGettingStats) return <Spinner />;
   const {totalDealers,
     totalProducts,
     totalPlans,
@@ -48,9 +39,7 @@ function DashboardLayout() {
   return (
     <StyledDashboardLayout>
       <Stats
-        bookings={bookings}
-        confirmedStays={confirmedStays}
-        numDays={numDays}
+       
         totalProducts={totalProducts}
         totalProductSales={totalProductSales}
         totalProductOrders={totalProductOrders}
@@ -63,7 +52,7 @@ function DashboardLayout() {
       {/* <TodayActivity latestOrders={latestFiveProductOrders}  /> */}
       <DurationChart confirmedStays={latestFivePlanOrders} />
 
-      <SalesChart numDays={numDays} bookings={bookings} monthlyProductPayments={monthlyProductPayments} monthlyPlanPayments={monthlyPlanPayments}/>
+      <SalesChart   monthlyProductPayments={monthlyProductPayments} monthlyPlanPayments={monthlyPlanPayments}/>
     </StyledDashboardLayout>
   );
 }

@@ -62,7 +62,7 @@ function CabinRow({ cabin }) {
       <div>{category.name}</div>
       <div>{count_in_stock}</div>
       <div>
-        {display === "1" ? (
+        {display === 1 ? (
           <div className="flex items-center text-green-600 gap-x-1">
             <span className="w-4 h-4 rounded-full bg-green-600"></span>
             <span>Active</span>

@@ -151,11 +151,10 @@ function CreateCabinForm({ cabinToEdit = {}, onCloseModal }) {
             theme="snow"
             value={specs}
             onChange={setSpecs}
-            className={"h-36"}
           />
         </div>
 
-        {/* <FormRow label="Publish" error={errors?.display?.message}>
+        <FormRow label="Publish" error={errors?.display?.message}>
           <select
             {...register("display", {
               required: "This field is required",
@@ -167,7 +166,7 @@ function CreateCabinForm({ cabinToEdit = {}, onCloseModal }) {
             <option value="1">Active</option>
             <option value="0">Inactive</option>
           </select>
-        </FormRow> */}
+        </FormRow>
         <FormRow label="Description" error={errors?.description?.message}>
           <Textarea
             type="text"

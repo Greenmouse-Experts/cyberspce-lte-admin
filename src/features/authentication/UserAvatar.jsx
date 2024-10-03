@@ -18,7 +18,7 @@ function UserAvatar() {
   return (
     <StyledUserAvatar>
       <ProfileAvatar fname={firstName} lname={lastName} url={image} size={50} font={18}/>
-      <span>{`${firstName} ${lastName}`}</span>
+      <span>{`${firstName}`}</span>
     </StyledUserAvatar>
   );
 }

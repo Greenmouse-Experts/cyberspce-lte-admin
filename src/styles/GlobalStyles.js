@@ -83,6 +83,14 @@ const GlobalStyles = createGlobalStyle`
 
 --image-grayscale: 10%;
 --image-opacity: 90%;
+
+span{
+  color: white !important;
+}
+
+select{
+  background-color: #18212f !important;
+}
   }
   
   /* Indigo */
